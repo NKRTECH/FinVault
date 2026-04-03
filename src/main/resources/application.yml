@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: finvault
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+  
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration: 86400000
+
+gemini:
+  api:
+    key: ${GEMINI_API_KEY}
+
+management:
+  server:
+    port: 9090
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics

@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/finvault
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    
+logging:
+  level:
+    root: INFO
+    com.finvault: DEBUG
