@@ -8,20 +8,42 @@
     <!-- Seed roles -->
     <changeSet id="005-1" author="finvault">
         <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM roles</sqlCheck>
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM roles WHERE name = 'ROLE_ADMIN'</sqlCheck>
         </preConditions>
         <insert tableName="roles">
             <column name="name" value="ROLE_ADMIN"/>
         </insert>
+        <rollback>
+            <delete tableName="roles">
+                <where>name = 'ROLE_ADMIN'</where>
+            </delete>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="005-2" author="finvault">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM roles WHERE name = 'ROLE_ANALYST'</sqlCheck>
+        </preConditions>
         <insert tableName="roles">
             <column name="name" value="ROLE_ANALYST"/>
         </insert>
+        <rollback>
+            <delete tableName="roles">
+                <where>name = 'ROLE_ANALYST'</where>
+            </delete>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="005-3" author="finvault">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM roles WHERE name = 'ROLE_VIEWER'</sqlCheck>
+        </preConditions>
         <insert tableName="roles">
             <column name="name" value="ROLE_VIEWER"/>
         </insert>
         <rollback>
             <delete tableName="roles">
-                <where>name IN ('ROLE_ADMIN', 'ROLE_ANALYST', 'ROLE_VIEWER')</where>
+                <where>name = 'ROLE_VIEWER'</where>
             </delete>
         </rollback>
     </changeSet>

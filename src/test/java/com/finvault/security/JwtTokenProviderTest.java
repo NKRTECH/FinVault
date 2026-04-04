@@ -100,7 +100,7 @@ class JwtTokenProviderTest {
     }
 
     @Test
-    void shouldPreserveRolesInToken() {
+    void shouldGenerateValidToken() {
         Authentication authentication = createAuthentication("admin", "ROLE_ADMIN");
         String token = jwtTokenProvider.generateToken(authentication);
 

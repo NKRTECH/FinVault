@@ -1,6 +1,8 @@
 package com.finvault.config;
 
 import com.finvault.security.JwtAuthenticationFilter;
+import com.finvault.security.CustomAuthenticationEntryPoint;
+import com.finvault.security.CustomAccessDeniedHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
