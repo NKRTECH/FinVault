@@ -49,7 +49,7 @@
     </changeSet>
 
     <!-- Seed admin user: admin / admin123 -->
-    <changeSet id="005-2" author="finvault" context="dev,docker">
+    <changeSet id="005-2" author="finvault">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">SELECT COUNT(*) FROM users WHERE username = 'admin'</sqlCheck>
         </preConditions>
@@ -71,7 +71,7 @@
     </changeSet>
 
     <!-- Assign ADMIN role to admin user -->
-    <changeSet id="005-3" author="finvault" context="dev,docker">
+    <changeSet id="005-3" author="finvault">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                 SELECT COUNT(*) FROM user_roles ur
