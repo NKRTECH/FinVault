@@ -6,7 +6,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <changeSet id="003-create-user-roles" author="finvault">
-        <preConditions onFail="MARK_RAN">
+        <preConditions onFail="HALT">
             <not>
                 <tableExists tableName="user_roles"/>
             </not>
@@ -39,7 +39,12 @@
                                  constraintName="fk_user_roles_role"
                                  onDelete="CASCADE"/>
 
+        <createIndex tableName="user_roles" indexName="idx_user_roles_role_id">
+            <column name="role_id"/>
+        </createIndex>
+
         <rollback>
+            <dropIndex tableName="user_roles" indexName="idx_user_roles_role_id"/>
             <dropTable tableName="user_roles"/>
         </rollback>
     </changeSet>

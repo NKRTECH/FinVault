@@ -30,7 +30,7 @@ RUN addgroup -S finvault && adduser -S finvault -G finvault
 RUN mkdir -p /app/logs && chown -R finvault:finvault /app/logs
 
 # Copy the built artifact from builder stage
-COPY --from=builder /app/target/*.jar app.jar
+COPY --from=builder /app/target/finvault-backend.jar app.jar
 
 # Switch to non-root user
 USER finvault

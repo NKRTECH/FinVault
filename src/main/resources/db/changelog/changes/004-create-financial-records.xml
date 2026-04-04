@@ -6,7 +6,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <changeSet id="004-create-financial-records" author="finvault">
-        <preConditions onFail="MARK_RAN">
+        <preConditions onFail="HALT">
             <not>
                 <tableExists tableName="financial_records"/>
             </not>
@@ -65,7 +65,12 @@
             <column name="deleted"/>
         </createIndex>
 
+        <createIndex tableName="financial_records" indexName="idx_records_user">
+            <column name="created_by_id"/>
+        </createIndex>
+
         <rollback>
+            <dropIndex tableName="financial_records" indexName="idx_records_user"/>
             <dropTable tableName="financial_records"/>
         </rollback>
     </changeSet>

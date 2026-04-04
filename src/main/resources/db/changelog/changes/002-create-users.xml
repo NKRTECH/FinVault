@@ -6,7 +6,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <changeSet id="002-create-users" author="finvault">
-        <preConditions onFail="MARK_RAN">
+        <preConditions onFail="HALT">
             <not>
                 <tableExists tableName="users"/>
             </not>
@@ -39,17 +39,7 @@
             </column>
         </createTable>
 
-        <createIndex tableName="users" indexName="idx_users_username">
-            <column name="username"/>
-        </createIndex>
-
-        <createIndex tableName="users" indexName="idx_users_email">
-            <column name="email"/>
-        </createIndex>
-
         <rollback>
-            <dropIndex tableName="users" indexName="idx_users_email"/>
-            <dropIndex tableName="users" indexName="idx_users_username"/>
             <dropTable tableName="users"/>
         </rollback>
     </changeSet>
