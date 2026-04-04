@@ -77,6 +77,6 @@ class FinancialRecordRepositoryTest {
         recordRepository.save(record);
 
         FinancialRecord updated = recordRepository.findById(testRecord.getId()).orElseThrow();
-        assertThat(updated.getDeleted()).isTrue();
+        assertThat(updated.isDeleted()).isTrue();
     }
 }

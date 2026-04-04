@@ -11,4 +11,7 @@
     <include file="changes/003-create-user-roles.xml" relativeToChangelogFile="true"/>
     <include file="changes/004-create-financial-records.xml" relativeToChangelogFile="true"/>
 
+    <!-- Seed data -->
+    <include file="changes/005-seed-roles-and-admin.xml" relativeToChangelogFile="true"/>
+
 </databaseChangeLog>

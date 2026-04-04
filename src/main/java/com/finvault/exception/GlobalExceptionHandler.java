@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -43,6 +45,20 @@ public class GlobalExceptionHandler {
         log.warn("Access denied on {}", request.getRequestURI());
         return buildErrorResponse(HttpStatus.FORBIDDEN, 
                 "You do not have permission to access this resource", request);
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ApiErrorResponse> handleBadCredentials(
+            BadCredentialsException ex, HttpServletRequest request) {
+        log.warn("Failed authentication attempt on {}", request.getRequestURI());
+        return buildErrorResponse(HttpStatus.UNAUTHORIZED, "Invalid username or password", request);
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<ApiErrorResponse> handleAuthenticationException(
+            AuthenticationException ex, HttpServletRequest request) {
+        log.warn("Authentication failed on {}: {}", request.getRequestURI(), ex.getMessage());
+        return buildErrorResponse(HttpStatus.UNAUTHORIZED, "Authentication failed", request);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
