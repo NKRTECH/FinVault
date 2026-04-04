@@ -1,0 +1,48 @@
+services:
+  # ── Core Services ──────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: finvault-postgres
+    environment:
+      POSTGRES_DB: finvault
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: pg_isready -U ${DB_USERNAME} -d finvault
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - finvault-network
+
+  app:
+    build: .
+    container_name: finvault-app
+    ports:
+      - "8080:8080"
+      - "9090:9090"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - app-logs:/app/logs
+    networks:
+      - finvault-network
+
+volumes:
+  pgdata:
+  app-logs:
+
+networks:
+  finvault-network:
+    driver: bridge
