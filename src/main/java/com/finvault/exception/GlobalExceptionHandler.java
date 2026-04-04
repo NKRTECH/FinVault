@@ -20,28 +20,28 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiErrorResponse> handleResourceNotFound(
             ResourceNotFoundException ex, HttpServletRequest request) {
         log.warn("Resource not found: {}", ex.getMessage());
-        return buildErrorResponse(HttpStatus.NOT_FOUND, "Not Found", ex.getMessage(), request);
+        return buildErrorResponse(HttpStatus.NOT_FOUND, ex.getMessage(), request);
     }
 
     @ExceptionHandler(DuplicateResourceException.class)
     public ResponseEntity<ApiErrorResponse> handleDuplicateResource(
             DuplicateResourceException ex, HttpServletRequest request) {
         log.warn("Duplicate resource conflict on {}", request.getRequestURI());
-        return buildErrorResponse(HttpStatus.CONFLICT, "Conflict", ex.getMessage(), request);
+        return buildErrorResponse(HttpStatus.CONFLICT, ex.getMessage(), request);
     }
 
     @ExceptionHandler(UnauthorizedException.class)
     public ResponseEntity<ApiErrorResponse> handleUnauthorized(
             UnauthorizedException ex, HttpServletRequest request) {
-        log.warn("Unauthorized access: {}", ex.getMessage());
-        return buildErrorResponse(HttpStatus.UNAUTHORIZED, "Unauthorized", ex.getMessage(), request);
+        log.warn("Unauthorized access attempt on {}", request.getRequestURI());
+        return buildErrorResponse(HttpStatus.UNAUTHORIZED, ex.getMessage(), request);
     }
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ApiErrorResponse> handleAccessDenied(
             AccessDeniedException ex, HttpServletRequest request) {
-        log.warn("Access denied: {}", ex.getMessage());
-        return buildErrorResponse(HttpStatus.FORBIDDEN, "Forbidden",
+        log.warn("Access denied on {}", request.getRequestURI());
+        return buildErrorResponse(HttpStatus.FORBIDDEN, 
                 "You do not have permission to access this resource", request);
     }
 
@@ -74,22 +74,36 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiErrorResponse> handleIllegalArgument(
             IllegalArgumentException ex, HttpServletRequest request) {
         log.warn("Bad request: {}", ex.getMessage());
-        return buildErrorResponse(HttpStatus.BAD_REQUEST, "Bad Request", ex.getMessage(), request);
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage(), request);
+    }
+
+    @ExceptionHandler(org.springframework.http.converter.HttpMessageNotReadableException.class)
+    public ResponseEntity<ApiErrorResponse> handleMessageNotReadable(
+            org.springframework.http.converter.HttpMessageNotReadableException ex, HttpServletRequest request) {
+        log.warn("Invalid request body on {}", request.getRequestURI());
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, "Malformed JSON request or invalid body", request);
+    }
+
+    @ExceptionHandler(org.springframework.web.HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<ApiErrorResponse> handleMethodNotSupported(
+            org.springframework.web.HttpRequestMethodNotSupportedException ex, HttpServletRequest request) {
+        log.warn("Method not supported on {}: {}", request.getRequestURI(), ex.getMessage());
+        return buildErrorResponse(HttpStatus.METHOD_NOT_ALLOWED, ex.getMessage(), request);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiErrorResponse> handleGenericException(
             Exception ex, HttpServletRequest request) {
         log.error("Unhandled exception on {}: {}", request.getRequestURI(), ex.getMessage(), ex);
-        return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error",
+        return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, 
                 "An unexpected error occurred. Please try again later.", request);
     }
 
     private ResponseEntity<ApiErrorResponse> buildErrorResponse(
-            HttpStatus status, String error, String message, HttpServletRequest request) {
+            HttpStatus status, String message, HttpServletRequest request) {
         ApiErrorResponse response = ApiErrorResponse.builder()
                 .status(status.value())
-                .error(error)
+                .error(status.getReasonPhrase())
                 .message(message)
                 .path(request.getRequestURI())
                 .build();

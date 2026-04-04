@@ -121,4 +121,32 @@ class GlobalExceptionHandlerTest {
         assertThat(response.getBody().getFieldErrors().get(0).getField()).isEqualTo("email");
         assertThat(response.getBody().getFieldErrors().get(0).getMessage()).isEqualTo("must be a well-formed email address");
     }
+
+    @Test
+    void shouldReturnBadRequestForHttpMessageNotReadableException() {
+        org.springframework.http.converter.HttpMessageNotReadableException ex = 
+                new org.springframework.http.converter.HttpMessageNotReadableException("Invalid JSON");
+
+        ResponseEntity<ApiErrorResponse> response = handler.handleMessageNotReadable(ex, request);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(response.getBody()).isNotNull();
+        assertThat(response.getBody().getStatus()).isEqualTo(400);
+        assertThat(response.getBody().getError()).isEqualTo("Bad Request");
+        assertThat(response.getBody().getMessage()).isEqualTo("Malformed JSON request or invalid body");
+    }
+
+    @Test
+    void shouldReturnMethodNotAllowedForHttpRequestMethodNotSupportedException() {
+        org.springframework.web.HttpRequestMethodNotSupportedException ex = 
+                new org.springframework.web.HttpRequestMethodNotSupportedException("POST");
+
+        ResponseEntity<ApiErrorResponse> response = handler.handleMethodNotSupported(ex, request);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.METHOD_NOT_ALLOWED);
+        assertThat(response.getBody()).isNotNull();
+        assertThat(response.getBody().getStatus()).isEqualTo(405);
+        assertThat(response.getBody().getError()).isEqualTo("Method Not Allowed");
+        assertThat(response.getBody().getMessage()).contains("POST");
+    }
 }
