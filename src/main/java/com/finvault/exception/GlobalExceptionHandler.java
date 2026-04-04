@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DuplicateResourceException.class)
     public ResponseEntity<ApiErrorResponse> handleDuplicateResource(
             DuplicateResourceException ex, HttpServletRequest request) {
-        log.warn("Duplicate resource: {}", ex.getMessage());
+        log.warn("Duplicate resource conflict on {}", request.getRequestURI());
         return buildErrorResponse(HttpStatus.CONFLICT, "Conflict", ex.getMessage(), request);
     }
 
@@ -61,7 +61,7 @@ public class GlobalExceptionHandler {
 
         ApiErrorResponse response = ApiErrorResponse.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
-                .error("Validation Failed")
+                .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
                 .message("Request body contains invalid fields")
                 .path(request.getRequestURI())
                 .fieldErrors(fieldErrors)

@@ -98,4 +98,27 @@ class GlobalExceptionHandlerTest {
         assertThat(response.getBody().getStatus()).isEqualTo(500);
         assertThat(response.getBody().getMessage()).isEqualTo("An unexpected error occurred. Please try again later.");
     }
+    
+    @Test
+    void shouldReturnBadRequestWithFieldErrorsForValidationException() {
+        org.springframework.validation.BindingResult bindingResult = mock(org.springframework.validation.BindingResult.class);
+        org.springframework.validation.FieldError fieldError = 
+                new org.springframework.validation.FieldError("user", "email", "must be a well-formed email address");
+        when(bindingResult.getFieldErrors()).thenReturn(java.util.List.of(fieldError));
+        
+        org.springframework.web.bind.MethodArgumentNotValidException ex = 
+                mock(org.springframework.web.bind.MethodArgumentNotValidException.class);
+        when(ex.getBindingResult()).thenReturn(bindingResult);
+
+        ResponseEntity<ApiErrorResponse> response = handler.handleValidationErrors(ex, request);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(response.getBody()).isNotNull();
+        assertThat(response.getBody().getStatus()).isEqualTo(400);
+        assertThat(response.getBody().getError()).isEqualTo("Bad Request");
+        assertThat(response.getBody().getMessage()).isEqualTo("Request body contains invalid fields");
+        assertThat(response.getBody().getFieldErrors()).hasSize(1);
+        assertThat(response.getBody().getFieldErrors().get(0).getField()).isEqualTo("email");
+        assertThat(response.getBody().getFieldErrors().get(0).getMessage()).isEqualTo("must be a well-formed email address");
+    }
 }
