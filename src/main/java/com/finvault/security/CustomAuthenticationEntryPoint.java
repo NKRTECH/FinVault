@@ -21,9 +21,8 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
     private final ObjectMapper mapper;
 
-    public CustomAuthenticationEntryPoint() {
-        this.mapper = new ObjectMapper();
-        this.mapper.registerModule(new JavaTimeModule());
+    public CustomAuthenticationEntryPoint(ObjectMapper mapper) {
+        this.mapper = mapper;
     }
 
     @Override

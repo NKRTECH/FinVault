@@ -1,0 +1,571 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------< com.finvault:finvault-backend >--------------------
+[INFO] Building FinVault 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ finvault-backend ---
+[INFO] Deleting D:\files\interview\Zorvyn Backend\finvault-backend\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ finvault-backend ---
+[INFO] Copying 3 resources from src\main\resources to target\classes
+[INFO] Copying 6 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ finvault-backend ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 27 source files with javac [debug parameters release 21] to target\classes
+[INFO] Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ finvault-backend ---
+[INFO] Copying 1 resource from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ finvault-backend ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 9 source files with javac [debug parameters release 21] to target\test-classes
+[INFO] Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+[INFO] /D:/files/interview/Zorvyn Backend/finvault-backend/src/test/java/com/finvault/exception/GlobalExceptionHandlerTest.java: D:\files\interview\Zorvyn Backend\finvault-backend\src\test\java\com\finvault\exception\GlobalExceptionHandlerTest.java uses or overrides a deprecated API.
+[INFO] /D:/files/interview/Zorvyn Backend/finvault-backend/src/test/java/com/finvault/exception/GlobalExceptionHandlerTest.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- surefire:3.5.2:test (default-test) @ finvault-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.finvault.controller.AuthControllerTest
+21:31:41.360 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.finvault.controller.AuthControllerTest]: AuthControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:31:41.508 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.finvault.FinVaultApplication for test class com.finvault.controller.AuthControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.4)
+
+2026-04-04T21:31:42.003+05:30  INFO 31320 --- [           main] c.f.controller.AuthControllerTest        : Starting AuthControllerTest using Java 21.0.8 with PID 31320 (started by nayan in D:\files\interview\Zorvyn Backend\finvault-backend)
+2026-04-04T21:31:42.006+05:30  INFO 31320 --- [           main] c.f.controller.AuthControllerTest        : No active profile set, falling back to 1 default profile: "default"
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (C:\Users\nayan\.m2\repository\net\bytebuddy\byte-buddy-agent\1.15.11\byte-buddy-agent-1.15.11.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+Java HotSpot(TM) 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+2026-04-04T21:31:45.552+05:30  WARN 31320 --- [           main] r$InitializeUserDetailsManagerConfigurer : Found 2 UserDetailsService beans, with names [inMemoryUserDetailsManager, com.finvault.security.CustomUserDetailsService#0]. Global Authentication Manager will not use a UserDetailsService for username/password login. Consider publishing a single UserDetailsService bean.
+2026-04-04T21:31:45.919+05:30  WARN 31320 --- [           main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 6c121faf-418b-441d-82b2-fadb3a6a3e4b
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-04-04T21:31:45.962+05:30  INFO 31320 --- [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-04-04T21:31:45.963+05:30  INFO 31320 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-04-04T21:31:45.965+05:30  INFO 31320 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2026-04-04T21:31:46.134+05:30  INFO 31320 --- [           main] c.f.controller.AuthControllerTest        : Started AuthControllerTest in 4.559 seconds (process running for 5.661)
+2026-04-04T21:31:46.506+05:30  WARN 31320 --- [           main] c.f.exception.GlobalExceptionHandler     : Validation failed: 2 errors
+2026-04-04T21:31:46.643+05:30  WARN 31320 --- [           main] c.f.exception.GlobalExceptionHandler     : Validation failed: 6 errors
+2026-04-04T21:31:46.704+05:30  WARN 31320 --- [           main] c.f.exception.GlobalExceptionHandler     : Duplicate resource conflict on /api/v1/auth/register
+2026-04-04T21:31:46.758+05:30  WARN 31320 --- [           main] c.f.exception.GlobalExceptionHandler     : Failed authentication attempt on /api/v1/auth/login
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.553 s -- in com.finvault.controller.AuthControllerTest
+[INFO] Running com.finvault.exception.GlobalExceptionHandlerTest
+2026-04-04T21:31:46.986+05:30  WARN 31320 --- [           main] c.f.exception.GlobalExceptionHandler     : Duplicate resource conflict on /api/v1/test
+2026-04-04T21:31:47.073+05:30  WARN 31320 --- [           main] c.f.exception.GlobalExceptionHandler     : Resource not found: User not found with id: '99'
+2026-04-04T21:31:47.076+05:30  WARN 31320 --- [           main] c.f.exception.GlobalExceptionHandler     : Access denied on /api/v1/test
+2026-04-04T21:31:47.079+05:30  WARN 31320 --- [           main] c.f.exception.GlobalExceptionHandler     : Method not supported on /api/v1/test: Request method 'POST' is not supported
+2026-04-04T21:31:47.082+05:30  WARN 31320 --- [           main] c.f.exception.GlobalExceptionHandler     : Unauthorized access attempt on /api/v1/test
+2026-04-04T21:31:47.276+05:30  WARN 31320 --- [           main] c.f.exception.GlobalExceptionHandler     : Validation failed: 1 errors
+2026-04-04T21:31:47.291+05:30 ERROR 31320 --- [           main] c.f.exception.GlobalExceptionHandler     : Unhandled exception on /api/v1/test: Something unexpected
+
+java.lang.RuntimeException: Something unexpected
+	at com.finvault.exception.GlobalExceptionHandlerTest.shouldReturnInternalServerErrorForGenericException(GlobalExceptionHandlerTest.java:92) ~[test-classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:767) ~[junit-platform-commons-1.11.4.jar:1.11.4]
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$8(TestMethodTestDescriptor.java:217) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:213) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:138) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:68) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:156) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:56) ~[surefire-junit-platform-3.5.2.jar:3.5.2]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184) ~[surefire-junit-platform-3.5.2.jar:3.5.2]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148) ~[surefire-junit-platform-3.5.2.jar:3.5.2]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122) ~[surefire-junit-platform-3.5.2.jar:3.5.2]
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385) ~[surefire-booter-3.5.2.jar:3.5.2]
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162) ~[surefire-booter-3.5.2.jar:3.5.2]
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507) ~[surefire-booter-3.5.2.jar:3.5.2]
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495) ~[surefire-booter-3.5.2.jar:3.5.2]
+
+2026-04-04T21:31:47.297+05:30  WARN 31320 --- [           main] c.f.exception.GlobalExceptionHandler     : Bad request: Invalid amount
+2026-04-04T21:31:47.301+05:30  WARN 31320 --- [           main] c.f.exception.GlobalExceptionHandler     : Invalid request body on /api/v1/test
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.528 s -- in com.finvault.exception.GlobalExceptionHandlerTest
+[INFO] Running com.finvault.FinVaultApplicationTests
+2026-04-04T21:31:47.308+05:30  INFO 31320 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.finvault.FinVaultApplicationTests]: FinVaultApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-04-04T21:31:47.328+05:30  INFO 31320 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.finvault.FinVaultApplication for test class com.finvault.FinVaultApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.4)
+
+2026-04-04T21:31:47.380+05:30  INFO 31320 --- [           main] com.finvault.FinVaultApplicationTests    : Starting FinVaultApplicationTests using Java 21.0.8 with PID 31320 (started by nayan in D:\files\interview\Zorvyn Backend\finvault-backend)
+2026-04-04T21:31:47.380+05:30  INFO 31320 --- [           main] com.finvault.FinVaultApplicationTests    : No active profile set, falling back to 1 default profile: "default"
+2026-04-04T21:31:48.264+05:30  INFO 31320 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-04T21:31:48.353+05:30  INFO 31320 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 72 ms. Found 3 JPA repository interfaces.
+2026-04-04T21:31:48.960+05:30  INFO 31320 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-04T21:31:49.189+05:30  INFO 31320 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-04-04T21:31:49.191+05:30  INFO 31320 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-04T21:31:49.262+05:30  INFO 31320 --- [           main] liquibase.database                       : Set default schema name to PUBLIC
+2026-04-04T21:31:49.895+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Creating database history table with name: PUBLIC.DATABASECHANGELOG
+2026-04-04T21:31:50.030+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2026-04-04T21:31:50.184+05:30  INFO 31320 --- [           main] liquibase.lockservice                    : Successfully acquired change log lock
+2026-04-04T21:31:50.186+05:30  INFO 31320 --- [           main] liquibase.command                        : Using deploymentId: 5318510185
+2026-04-04T21:31:50.188+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2026-04-04T21:31:50.232+05:30  INFO 31320 --- [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/001-create-roles.xml::001-create-roles::finvault
+2026-04-04T21:31:50.236+05:30  INFO 31320 --- [           main] liquibase.snapshot                       : Creating snapshot
+2026-04-04T21:31:50.271+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Table roles created
+2026-04-04T21:31:50.271+05:30  INFO 31320 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/001-create-roles.xml::001-create-roles::finvault ran successfully in 36ms
+2026-04-04T21:31:50.283+05:30  INFO 31320 --- [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/002-create-users.xml::002-create-users::finvault
+2026-04-04T21:31:50.284+05:30  INFO 31320 --- [           main] liquibase.snapshot                       : Creating snapshot
+2026-04-04T21:31:50.293+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Table users created
+2026-04-04T21:31:50.293+05:30  INFO 31320 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/002-create-users.xml::002-create-users::finvault ran successfully in 10ms
+2026-04-04T21:31:50.299+05:30  INFO 31320 --- [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/003-create-user-roles.xml::003-create-user-roles::finvault
+2026-04-04T21:31:50.300+05:30  INFO 31320 --- [           main] liquibase.snapshot                       : Creating snapshot
+2026-04-04T21:31:50.306+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Table user_roles created
+2026-04-04T21:31:50.309+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Primary key added to user_roles (user_id, role_id)
+2026-04-04T21:31:50.320+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Foreign key constraint added to user_roles (user_id)
+2026-04-04T21:31:50.322+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Foreign key constraint added to user_roles (role_id)
+2026-04-04T21:31:50.325+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Index idx_user_roles_role_id created
+2026-04-04T21:31:50.325+05:30  INFO 31320 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/003-create-user-roles.xml::003-create-user-roles::finvault ran successfully in 26ms
+2026-04-04T21:31:50.332+05:30  INFO 31320 --- [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/004-create-financial-records.xml::004-create-financial-records::finvault
+2026-04-04T21:31:50.333+05:30  INFO 31320 --- [           main] liquibase.snapshot                       : Creating snapshot
+2026-04-04T21:31:50.341+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Table financial_records created
+2026-04-04T21:31:50.343+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Foreign key constraint added to financial_records (created_by_id)
+2026-04-04T21:31:50.345+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Index idx_records_date created
+2026-04-04T21:31:50.351+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Index idx_records_category created
+2026-04-04T21:31:50.352+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Index idx_records_type created
+2026-04-04T21:31:50.354+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Index idx_records_deleted created
+2026-04-04T21:31:50.356+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Index idx_records_user created
+2026-04-04T21:31:50.356+05:30  INFO 31320 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/004-create-financial-records.xml::004-create-financial-records::finvault ran successfully in 24ms
+2026-04-04T21:31:50.358+05:30  INFO 31320 --- [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/005-seed-roles-and-admin.xml::005-1::finvault
+2026-04-04T21:31:50.363+05:30  INFO 31320 --- [           main] liquibase.changelog                      : New row inserted into roles
+2026-04-04T21:31:50.363+05:30  INFO 31320 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/005-seed-roles-and-admin.xml::005-1::finvault ran successfully in 5ms
+2026-04-04T21:31:50.365+05:30  INFO 31320 --- [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/005-seed-roles-and-admin.xml::005-2::finvault
+2026-04-04T21:31:50.368+05:30  INFO 31320 --- [           main] liquibase.changelog                      : New row inserted into roles
+2026-04-04T21:31:50.368+05:30  INFO 31320 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/005-seed-roles-and-admin.xml::005-2::finvault ran successfully in 3ms
+2026-04-04T21:31:50.371+05:30  INFO 31320 --- [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/005-seed-roles-and-admin.xml::005-3::finvault
+2026-04-04T21:31:50.373+05:30  INFO 31320 --- [           main] liquibase.changelog                      : New row inserted into roles
+2026-04-04T21:31:50.374+05:30  INFO 31320 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/005-seed-roles-and-admin.xml::005-3::finvault ran successfully in 3ms
+2026-04-04T21:31:50.385+05:30  INFO 31320 --- [           main] liquibase.util                           : UPDATE SUMMARY
+2026-04-04T21:31:50.385+05:30  INFO 31320 --- [           main] liquibase.util                           : Run:                          7
+2026-04-04T21:31:50.385+05:30  INFO 31320 --- [           main] liquibase.util                           : Previously run:               0
+2026-04-04T21:31:50.385+05:30  INFO 31320 --- [           main] liquibase.util                           : Filtered out:                 2
+2026-04-04T21:31:50.385+05:30  INFO 31320 --- [           main] liquibase.util                           : -------------------------------
+2026-04-04T21:31:50.385+05:30  INFO 31320 --- [           main] liquibase.util                           : Total change sets:            9
+2026-04-04T21:31:50.385+05:30  INFO 31320 --- [           main] liquibase.util                           : FILTERED CHANGE SETS SUMMARY
+2026-04-04T21:31:50.385+05:30  INFO 31320 --- [           main] liquibase.util                           : Context mismatch:             2
+2026-04-04T21:31:50.388+05:30  INFO 31320 --- [           main] liquibase.util                           : Update summary generated
+2026-04-04T21:31:50.391+05:30  INFO 31320 --- [           main] liquibase.command                        : Update command completed successfully.
+2026-04-04T21:31:50.391+05:30  INFO 31320 --- [           main] liquibase.ui                             : Liquibase: Update has been successful. Rows affected: 10
+2026-04-04T21:31:50.394+05:30  INFO 31320 --- [           main] liquibase.lockservice                    : Successfully released change log lock
+2026-04-04T21:31:50.395+05:30  INFO 31320 --- [           main] liquibase.command                        : Command execution complete
+2026-04-04T21:31:50.612+05:30  INFO 31320 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-04T21:31:50.708+05:30  INFO 31320 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2026-04-04T21:31:50.786+05:30  INFO 31320 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-04T21:31:50.951+05:30  INFO 31320 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-04T21:31:51.001+05:30  WARN 31320 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-04T21:31:51.015+05:30  INFO 31320 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-04T21:31:51.842+05:30  INFO 31320 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-04T21:31:51.845+05:30  INFO 31320 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-04T21:31:52.362+05:30  INFO 31320 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-04-04T21:31:52.543+05:30  WARN 31320 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-04T21:31:53.865+05:30  INFO 31320 --- [           main] com.finvault.FinVaultApplicationTests    : Started FinVaultApplicationTests in 6.532 seconds (process running for 13.392)
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.671 s -- in com.finvault.FinVaultApplicationTests
+[INFO] Running com.finvault.repository.FinancialRecordRepositoryTest
+2026-04-04T21:31:53.981+05:30  INFO 31320 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.finvault.repository.FinancialRecordRepositoryTest]: FinancialRecordRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-04-04T21:31:54.012+05:30  INFO 31320 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.finvault.FinVaultApplication for test class com.finvault.repository.FinancialRecordRepositoryTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.4)
+
+2026-04-04T21:31:54.041+05:30  INFO 31320 --- [           main] c.f.r.FinancialRecordRepositoryTest      : Starting FinancialRecordRepositoryTest using Java 21.0.8 with PID 31320 (started by nayan in D:\files\interview\Zorvyn Backend\finvault-backend)
+2026-04-04T21:31:54.041+05:30  INFO 31320 --- [           main] c.f.r.FinancialRecordRepositoryTest      : No active profile set, falling back to 1 default profile: "default"
+2026-04-04T21:31:54.193+05:30  INFO 31320 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-04T21:31:54.226+05:30  INFO 31320 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 31 ms. Found 3 JPA repository interfaces.
+2026-04-04T21:31:54.243+05:30  INFO 31320 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2026-04-04T21:31:54.278+05:30  INFO 31320 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:649b776a-dbe8-49da-83c3-f72e1ad36416;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2026-04-04T21:31:54.289+05:30  INFO 31320 --- [           main] liquibase.database                       : Set default schema name to PUBLIC
+2026-04-04T21:31:54.384+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Creating database history table with name: PUBLIC.DATABASECHANGELOG
+2026-04-04T21:31:54.388+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2026-04-04T21:31:54.406+05:30  INFO 31320 --- [           main] liquibase.lockservice                    : Successfully acquired change log lock
+2026-04-04T21:31:54.407+05:30  INFO 31320 --- [           main] liquibase.command                        : Using deploymentId: 5318514407
+2026-04-04T21:31:54.407+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2026-04-04T21:31:54.419+05:30  INFO 31320 --- [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/001-create-roles.xml::001-create-roles::finvault
+2026-04-04T21:31:54.420+05:30  INFO 31320 --- [           main] liquibase.snapshot                       : Creating snapshot
+2026-04-04T21:31:54.426+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Table roles created
+2026-04-04T21:31:54.426+05:30  INFO 31320 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/001-create-roles.xml::001-create-roles::finvault ran successfully in 7ms
+2026-04-04T21:31:54.428+05:30  INFO 31320 --- [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/002-create-users.xml::002-create-users::finvault
+2026-04-04T21:31:54.429+05:30  INFO 31320 --- [           main] liquibase.snapshot                       : Creating snapshot
+2026-04-04T21:31:54.436+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Table users created
+2026-04-04T21:31:54.436+05:30  INFO 31320 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/002-create-users.xml::002-create-users::finvault ran successfully in 7ms
+2026-04-04T21:31:54.439+05:30  INFO 31320 --- [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/003-create-user-roles.xml::003-create-user-roles::finvault
+2026-04-04T21:31:54.440+05:30  INFO 31320 --- [           main] liquibase.snapshot                       : Creating snapshot
+2026-04-04T21:31:54.445+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Table user_roles created
+2026-04-04T21:31:54.446+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Primary key added to user_roles (user_id, role_id)
+2026-04-04T21:31:54.449+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Foreign key constraint added to user_roles (user_id)
+2026-04-04T21:31:54.451+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Foreign key constraint added to user_roles (role_id)
+2026-04-04T21:31:54.452+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Index idx_user_roles_role_id created
+2026-04-04T21:31:54.453+05:30  INFO 31320 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/003-create-user-roles.xml::003-create-user-roles::finvault ran successfully in 13ms
+2026-04-04T21:31:54.457+05:30  INFO 31320 --- [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/004-create-financial-records.xml::004-create-financial-records::finvault
+2026-04-04T21:31:54.459+05:30  INFO 31320 --- [           main] liquibase.snapshot                       : Creating snapshot
+2026-04-04T21:31:54.468+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Table financial_records created
+2026-04-04T21:31:54.470+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Foreign key constraint added to financial_records (created_by_id)
+2026-04-04T21:31:54.472+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Index idx_records_date created
+2026-04-04T21:31:54.473+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Index idx_records_category created
+2026-04-04T21:31:54.475+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Index idx_records_type created
+2026-04-04T21:31:54.476+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Index idx_records_deleted created
+2026-04-04T21:31:54.478+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Index idx_records_user created
+2026-04-04T21:31:54.478+05:30  INFO 31320 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/004-create-financial-records.xml::004-create-financial-records::finvault ran successfully in 21ms
+2026-04-04T21:31:54.481+05:30  INFO 31320 --- [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/005-seed-roles-and-admin.xml::005-1::finvault
+2026-04-04T21:31:54.483+05:30  INFO 31320 --- [           main] liquibase.changelog                      : New row inserted into roles
+2026-04-04T21:31:54.484+05:30  INFO 31320 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/005-seed-roles-and-admin.xml::005-1::finvault ran successfully in 2ms
+2026-04-04T21:31:54.486+05:30  INFO 31320 --- [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/005-seed-roles-and-admin.xml::005-2::finvault
+2026-04-04T21:31:54.487+05:30  INFO 31320 --- [           main] liquibase.changelog                      : New row inserted into roles
+2026-04-04T21:31:54.487+05:30  INFO 31320 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/005-seed-roles-and-admin.xml::005-2::finvault ran successfully in 1ms
+2026-04-04T21:31:54.491+05:30  INFO 31320 --- [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/005-seed-roles-and-admin.xml::005-3::finvault
+2026-04-04T21:31:54.493+05:30  INFO 31320 --- [           main] liquibase.changelog                      : New row inserted into roles
+2026-04-04T21:31:54.493+05:30  INFO 31320 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/005-seed-roles-and-admin.xml::005-3::finvault ran successfully in 2ms
+2026-04-04T21:31:54.494+05:30  INFO 31320 --- [           main] liquibase.util                           : UPDATE SUMMARY
+2026-04-04T21:31:54.495+05:30  INFO 31320 --- [           main] liquibase.util                           : Run:                          7
+2026-04-04T21:31:54.495+05:30  INFO 31320 --- [           main] liquibase.util                           : Previously run:               0
+2026-04-04T21:31:54.495+05:30  INFO 31320 --- [           main] liquibase.util                           : Filtered out:                 2
+2026-04-04T21:31:54.495+05:30  INFO 31320 --- [           main] liquibase.util                           : -------------------------------
+2026-04-04T21:31:54.495+05:30  INFO 31320 --- [           main] liquibase.util                           : Total change sets:            9
+2026-04-04T21:31:54.495+05:30  INFO 31320 --- [           main] liquibase.util                           : FILTERED CHANGE SETS SUMMARY
+2026-04-04T21:31:54.495+05:30  INFO 31320 --- [           main] liquibase.util                           : Context mismatch:             2
+2026-04-04T21:31:54.495+05:30  INFO 31320 --- [           main] liquibase.util                           : Update summary generated
+2026-04-04T21:31:54.495+05:30  INFO 31320 --- [           main] liquibase.command                        : Update command completed successfully.
+2026-04-04T21:31:54.495+05:30  INFO 31320 --- [           main] liquibase.ui                             : Liquibase: Update has been successful. Rows affected: 10
+2026-04-04T21:31:54.497+05:30  INFO 31320 --- [           main] liquibase.lockservice                    : Successfully released change log lock
+2026-04-04T21:31:54.498+05:30  INFO 31320 --- [           main] liquibase.command                        : Command execution complete
+2026-04-04T21:31:54.522+05:30  INFO 31320 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-04T21:31:54.526+05:30  INFO 31320 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-04T21:31:54.537+05:30  INFO 31320 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-04T21:31:54.538+05:30  WARN 31320 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-04T21:31:54.540+05:30  INFO 31320 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseFactory$EmbeddedDataSourceProxy@54188be5']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-04T21:31:54.639+05:30  INFO 31320 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-04T21:31:54.639+05:30  INFO 31320 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-04T21:31:54.705+05:30  INFO 31320 --- [           main] c.f.r.FinancialRecordRepositoryTest      : Started FinancialRecordRepositoryTest in 0.69 seconds (process running for 14.232)
+Hibernate: insert into users (created_at,email,full_name,password,status,updated_at,username,id) values (?,?,?,?,?,?,?,default)
+Hibernate: insert into financial_records (amount,category,created_at,created_by_id,date,deleted,description,type,updated_at,id) values (?,?,?,?,?,?,?,?,?,default)
+Hibernate: insert into users (created_at,email,full_name,password,status,updated_at,username,id) values (?,?,?,?,?,?,?,default)
+Hibernate: insert into financial_records (amount,category,created_at,created_by_id,date,deleted,description,type,updated_at,id) values (?,?,?,?,?,?,?,?,?,default)
+Hibernate: insert into users (created_at,email,full_name,password,status,updated_at,username,id) values (?,?,?,?,?,?,?,default)
+Hibernate: insert into financial_records (amount,category,created_at,created_by_id,date,deleted,description,type,updated_at,id) values (?,?,?,?,?,?,?,?,?,default)
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.906 s -- in com.finvault.repository.FinancialRecordRepositoryTest
+[INFO] Running com.finvault.repository.RoleRepositoryTest
+2026-04-04T21:31:54.885+05:30  INFO 31320 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.finvault.repository.RoleRepositoryTest]: RoleRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-04-04T21:31:54.895+05:30  INFO 31320 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.finvault.FinVaultApplication for test class com.finvault.repository.RoleRepositoryTest
+Hibernate: insert into roles (name,id) values (?,default)
+2026-04-04T21:31:54.910+05:30  WARN 31320 --- [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 23505, SQLState: 23505
+2026-04-04T21:31:54.910+05:30 ERROR 31320 --- [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_4 ON PUBLIC.ROLES(NAME NULLS FIRST) VALUES ( /* 1 */ 'ROLE_ADMIN' )"; SQL statement:
+insert into roles (name,id) values (?,default) [23505-232]
+[ERROR] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.049 s <<< FAILURE! -- in com.finvault.repository.RoleRepositoryTest
+[ERROR] com.finvault.repository.RoleRepositoryTest.shouldFindRoleByName -- Time elapsed: 0.032 s <<< ERROR!
+org.springframework.dao.DataIntegrityViolationException: 
+could not execute statement [Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_4 ON PUBLIC.ROLES(NAME NULLS FIRST) VALUES ( /* 1 */ 'ROLE_ADMIN' )"; SQL statement:
+insert into roles (name,id) values (?,default) [23505-232]] [insert into roles (name,id) values (?,default)]; SQL [insert into roles (name,id) values (?,default)]; constraint [PUBLIC.CONSTRAINT_INDEX_4]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:290)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:560)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:343)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:160)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:165)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at jdk.proxy2/jdk.proxy2.$Proxy219.save(Unknown Source)
+	at com.finvault.repository.RoleRepositoryTest.shouldFindRoleByName(RoleRepositoryTest.java:23)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_4 ON PUBLIC.ROLES(NAME NULLS FIRST) VALUES ( /* 1 */ 'ROLE_ADMIN' )"; SQL statement:
+insert into roles (name,id) values (?,default) [23505-232]] [insert into roles (name,id) values (?,default)]
+	at org.hibernate.dialect.H2Dialect.lambda$buildSQLExceptionConversionDelegate$3(H2Dialect.java:759)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:197)
+	at org.hibernate.id.insert.GetGeneratedKeysDelegate.performMutation(GetGeneratedKeysDelegate.java:116)
+	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorSingleNonBatched.performNonBatchedOperations(MutationExecutorSingleNonBatched.java:47)
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:55)
+	at org.hibernate.persister.entity.mutation.InsertCoordinatorStandard.doStaticInserts(InsertCoordinatorStandard.java:194)
+	at org.hibernate.persister.entity.mutation.InsertCoordinatorStandard.coordinateInsert(InsertCoordinatorStandard.java:132)
+	at org.hibernate.persister.entity.mutation.InsertCoordinatorStandard.insert(InsertCoordinatorStandard.java:95)
+	at org.hibernate.action.internal.EntityIdentityInsertAction.execute(EntityIdentityInsertAction.java:85)
+	at org.hibernate.engine.spi.ActionQueue.execute(ActionQueue.java:682)
+	at org.hibernate.engine.spi.ActionQueue.addResolvedEntityInsertAction(ActionQueue.java:293)
+	at org.hibernate.engine.spi.ActionQueue.addInsertAction(ActionQueue.java:274)
+	at org.hibernate.engine.spi.ActionQueue.addAction(ActionQueue.java:324)
+	at org.hibernate.event.internal.AbstractSaveEventListener.addInsertAction(AbstractSaveEventListener.java:393)
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSaveOrReplicate(AbstractSaveEventListener.java:307)
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSave(AbstractSaveEventListener.java:223)
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:136)
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:177)
+	at org.hibernate.event.internal.DefaultPersistEventListener.persist(DefaultPersistEventListener.java:95)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:79)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:55)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)
+	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:761)
+	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:745)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:320)
+	at jdk.proxy2/jdk.proxy2.$Proxy213.persist(Unknown Source)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.save(SimpleJpaRepository.java:636)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:515)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:284)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:731)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:174)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	... 9 more
+Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_4 ON PUBLIC.ROLES(NAME NULLS FIRST) VALUES ( /* 1 */ 'ROLE_ADMIN' )"; SQL statement:
+insert into roles (name,id) values (?,default) [23505-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.index.Index.getDuplicateKeyException(Index.java:523)
+	at org.h2.mvstore.db.MVSecondaryIndex.checkUnique(MVSecondaryIndex.java:223)
+	at org.h2.mvstore.db.MVSecondaryIndex.add(MVSecondaryIndex.java:184)
+	at org.h2.mvstore.db.MVTable.addRow(MVTable.java:517)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:174)
+	at org.h2.command.dml.Insert.update(Insert.java:135)
+	at org.h2.command.CommandContainer.executeUpdateWithGeneratedKeys(CommandContainer.java:212)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:133)
+	at org.h2.command.Command.executeUpdate(Command.java:304)
+	at org.h2.command.Command.executeUpdate(Command.java:248)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:213)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:172)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:194)
+	... 55 more
+
+[INFO] Running com.finvault.repository.UserRepositoryTest
+2026-04-04T21:31:54.936+05:30  INFO 31320 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.finvault.repository.UserRepositoryTest]: UserRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-04-04T21:31:54.944+05:30  INFO 31320 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.finvault.FinVaultApplication for test class com.finvault.repository.UserRepositoryTest
+Hibernate: insert into users (created_at,email,full_name,password,status,updated_at,username,id) values (?,?,?,?,?,?,?,default)
+Hibernate: select u1_0.id from users u1_0 where u1_0.username=? fetch first ? rows only
+Hibernate: insert into users (created_at,email,full_name,password,status,updated_at,username,id) values (?,?,?,?,?,?,?,default)
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,u1_0.full_name,u1_0.password,r1_0.user_id,r1_1.id,r1_1.name,u1_0.status,u1_0.updated_at,u1_0.username from users u1_0 left join user_roles r1_0 on u1_0.id=r1_0.user_id left join roles r1_1 on r1_1.id=r1_0.role_id where u1_0.username=?
+Hibernate: insert into users (created_at,email,full_name,password,status,updated_at,username,id) values (?,?,?,?,?,?,?,default)
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,u1_0.full_name,u1_0.password,r1_0.user_id,r1_1.id,r1_1.name,u1_0.status,u1_0.updated_at,u1_0.username from users u1_0 left join user_roles r1_0 on u1_0.id=r1_0.user_id left join roles r1_1 on r1_1.id=r1_0.role_id where u1_0.email=?
+Hibernate: insert into users (created_at,email,full_name,password,status,updated_at,username,id) values (?,?,?,?,?,?,?,default)
+Hibernate: select u1_0.id from users u1_0 where u1_0.email=? fetch first ? rows only
+Hibernate: insert into users (created_at,email,full_name,password,status,updated_at,username,id) values (?,?,?,?,?,?,?,default)
+Hibernate: insert into users (created_at,email,full_name,password,status,updated_at,username,id) values (?,?,?,?,?,?,?,default)
+2026-04-04T21:31:55.130+05:30  WARN 31320 --- [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 23505, SQLState: 23505
+2026-04-04T21:31:55.130+05:30 ERROR 31320 --- [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_4D ON PUBLIC.USERS(USERNAME NULLS FIRST) VALUES ( /* 8 */ 'test_user' )"; SQL statement:
+insert into users (created_at,email,full_name,password,status,updated_at,username,id) values (?,?,?,?,?,?,?,default) [23505-232]
+Hibernate: insert into users (created_at,email,full_name,password,status,updated_at,username,id) values (?,?,?,?,?,?,?,default)
+Hibernate: select u1_0.id from users u1_0 where u1_0.username=? fetch first ? rows only
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.208 s -- in com.finvault.repository.UserRepositoryTest
+[INFO] Running com.finvault.security.JwtTokenProviderTest
+2026-04-04T21:31:55.248+05:30 ERROR 31320 --- [           main] com.finvault.security.JwtTokenProvider   : JWT claims string is empty: CharSequence cannot be null or empty.
+2026-04-04T21:31:55.252+05:30 ERROR 31320 --- [           main] com.finvault.security.JwtTokenProvider   : Invalid JWT token: Malformed protected header JSON: Unable to deserialize: Unexpected character ('?' (code 65533 / 0xfffd)): expected a valid value (JSON String, Number, Array, Object or token 'null', 'true' or 'false')
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 1]
+2026-04-04T21:31:55.258+05:30 ERROR 31320 --- [           main] com.finvault.security.JwtTokenProvider   : Invalid JWT signature: JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
+2026-04-04T21:31:55.262+05:30 ERROR 31320 --- [           main] com.finvault.security.JwtTokenProvider   : Expired JWT token: JWT expired 1260 milliseconds ago at 2026-04-04T16:01:54.000Z. Current time: 2026-04-04T16:01:55.260Z. Allowed clock skew: 0 milliseconds.
+2026-04-04T21:31:55.272+05:30 ERROR 31320 --- [           main] com.finvault.security.JwtTokenProvider   : JWT claims string is empty: CharSequence cannot be null or empty.
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.128 s -- in com.finvault.security.JwtTokenProviderTest
+[INFO] Running com.finvault.security.SecurityIntegrationTest
+2026-04-04T21:31:55.275+05:30  INFO 31320 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.finvault.security.SecurityIntegrationTest]: SecurityIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-04-04T21:31:55.309+05:30  INFO 31320 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.finvault.FinVaultApplication for test class com.finvault.security.SecurityIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.4)
+
+2026-04-04T21:31:55.332+05:30  INFO 31320 --- [           main] c.f.security.SecurityIntegrationTest     : Starting SecurityIntegrationTest using Java 21.0.8 with PID 31320 (started by nayan in D:\files\interview\Zorvyn Backend\finvault-backend)
+2026-04-04T21:31:55.332+05:30  INFO 31320 --- [           main] c.f.security.SecurityIntegrationTest     : The following 1 profile is active: "test"
+2026-04-04T21:31:55.663+05:30  INFO 31320 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-04T21:31:55.692+05:30  INFO 31320 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 27 ms. Found 3 JPA repository interfaces.
+2026-04-04T21:31:55.796+05:30  INFO 31320 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-04-04T21:31:55.798+05:30  INFO 31320 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn23: url=jdbc:h2:mem:testdb user=SA
+2026-04-04T21:31:55.799+05:30  INFO 31320 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-04-04T21:31:55.799+05:30  INFO 31320 --- [           main] liquibase.database                       : Set default schema name to PUBLIC
+2026-04-04T21:31:55.896+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2026-04-04T21:31:55.917+05:30  INFO 31320 --- [           main] liquibase.ui                             : Database is up to date, no changesets to execute
+2026-04-04T21:31:55.918+05:30  INFO 31320 --- [           main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2026-04-04T21:31:55.920+05:30  INFO 31320 --- [           main] liquibase.util                           : UPDATE SUMMARY
+2026-04-04T21:31:55.920+05:30  INFO 31320 --- [           main] liquibase.util                           : Run:                          0
+2026-04-04T21:31:55.920+05:30  INFO 31320 --- [           main] liquibase.util                           : Previously run:               7
+2026-04-04T21:31:55.920+05:30  INFO 31320 --- [           main] liquibase.util                           : Filtered out:                 2
+2026-04-04T21:31:55.920+05:30  INFO 31320 --- [           main] liquibase.util                           : -------------------------------
+2026-04-04T21:31:55.920+05:30  INFO 31320 --- [           main] liquibase.util                           : Total change sets:            9
+2026-04-04T21:31:55.920+05:30  INFO 31320 --- [           main] liquibase.util                           : FILTERED CHANGE SETS SUMMARY
+2026-04-04T21:31:55.920+05:30  INFO 31320 --- [           main] liquibase.util                           : Context mismatch:             2
+2026-04-04T21:31:55.920+05:30  INFO 31320 --- [           main] liquibase.util                           : Already ran:                  2
+2026-04-04T21:31:55.920+05:30  INFO 31320 --- [           main] liquibase.util                           : Update summary generated
+2026-04-04T21:31:55.920+05:30  INFO 31320 --- [           main] liquibase.command                        : Command execution complete
+2026-04-04T21:31:55.984+05:30  INFO 31320 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-04T21:31:55.987+05:30  INFO 31320 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-04T21:31:55.995+05:30  INFO 31320 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-04T21:31:55.997+05:30  WARN 31320 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-04T21:31:55.997+05:30  INFO 31320 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-2)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-04T21:31:56.074+05:30  INFO 31320 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-04T21:31:56.075+05:30  INFO 31320 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-04T21:31:56.202+05:30  INFO 31320 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-04-04T21:31:56.278+05:30  WARN 31320 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-04T21:31:56.940+05:30  INFO 31320 --- [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-04-04T21:31:56.940+05:30  INFO 31320 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-04-04T21:31:56.941+05:30  INFO 31320 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-04-04T21:31:56.972+05:30  INFO 31320 --- [           main] c.f.security.SecurityIntegrationTest     : Started SecurityIntegrationTest in 1.658 seconds (process running for 16.499)
+2026-04-04T21:31:57.021+05:30  WARN 31320 --- [           main] c.f.s.CustomAuthenticationEntryPoint     : Unauthorized access attempt on /api/v1/some-protected-route
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.756 s -- in com.finvault.security.SecurityIntegrationTest
+[INFO] Running com.finvault.service.AuthServiceTest
+2026-04-04T21:31:57.422+05:30  INFO 31320 --- [           main] com.finvault.service.AuthService         : User logged in successfully: admin
+2026-04-04T21:31:57.438+05:30  INFO 31320 --- [           main] com.finvault.service.AuthService         : User registered successfully: newuser
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.404 s -- in com.finvault.service.AuthServiceTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Errors: 
+[ERROR]   RoleRepositoryTest.shouldFindRoleByName:23 ╗ DataIntegrityViolation could not execute statement [Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_4 ON PUBLIC.ROLES(NAME NULLS FIRST) VALUES ( /* 1 */ 'ROLE_ADMIN' )"; SQL statement:
+insert into roles (name,id) values (?,default) [23505-232]] [insert into roles (name,id) values (?,default)]; SQL [insert into roles (name,id) values (?,default)]; constraint [PUBLIC.CONSTRAINT_INDEX_4]
+[INFO] 
+[ERROR] Tests run: 41, Failures: 0, Errors: 1, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  29.649 s
+[INFO] Finished at: 2026-04-04T21:31:57+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.2:test (default-test) on project finvault-backend: 
+[ERROR] 
+[ERROR] See D:\files\interview\Zorvyn Backend\finvault-backend\target\surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

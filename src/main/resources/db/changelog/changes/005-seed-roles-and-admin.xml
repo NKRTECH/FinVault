@@ -7,7 +7,6 @@
 
     <!-- Seed roles -->
     <changeSet id="005-1" author="finvault">
-        <validCheckSum>ANY</validCheckSum>
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">SELECT COUNT(*) FROM roles WHERE name = 'ROLE_ADMIN'</sqlCheck>
         </preConditions>

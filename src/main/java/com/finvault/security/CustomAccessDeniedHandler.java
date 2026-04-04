@@ -21,9 +21,8 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
     private final ObjectMapper mapper;
 
-    public CustomAccessDeniedHandler() {
-        this.mapper = new ObjectMapper();
-        this.mapper.registerModule(new JavaTimeModule());
+    public CustomAccessDeniedHandler(ObjectMapper mapper) {
+        this.mapper = mapper;
     }
 
     @Override
