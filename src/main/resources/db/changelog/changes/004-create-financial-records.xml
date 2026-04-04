@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="004-create-financial-records" author="finvault">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="financial_records"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="financial_records">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="amount" type="DECIMAL(19,4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(500)"/>
+            <column name="date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deleted" type="BOOLEAN" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="financial_records"
+                                 baseColumnNames="created_by_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_financial_records_user"/>
+
+        <createIndex tableName="financial_records" indexName="idx_records_date">
+            <column name="date"/>
+        </createIndex>
+
+        <createIndex tableName="financial_records" indexName="idx_records_category">
+            <column name="category"/>
+        </createIndex>
+
+        <createIndex tableName="financial_records" indexName="idx_records_type">
+            <column name="type"/>
+        </createIndex>
+
+        <createIndex tableName="financial_records" indexName="idx_records_deleted">
+            <column name="deleted"/>
+        </createIndex>
+
+        <rollback>
+            <dropTable tableName="financial_records"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
