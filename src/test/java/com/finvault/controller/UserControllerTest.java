@@ -76,7 +76,7 @@ class UserControllerTest {
                 .updatedAt(LocalDateTime.now())
                 .build();
 
-        // Set a default authentication for endpoints that need Authentication parameter
+        // Clear any existing authentication so each test sets its own security context explicitly
         SecurityContextHolder.clearContext();
     }
 

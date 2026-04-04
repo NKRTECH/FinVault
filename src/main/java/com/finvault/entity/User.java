@@ -46,6 +46,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
+    @org.hibernate.annotations.BatchSize(size = 20)
     @Builder.Default
     private Set<Role> roles = new HashSet<>();
 
