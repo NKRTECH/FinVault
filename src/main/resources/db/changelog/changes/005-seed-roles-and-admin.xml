@@ -6,7 +6,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <!-- Seed roles -->
-    <changeSet id="005-1" author="finvault" context="dev,docker">
+    <changeSet id="005-1" author="finvault">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">SELECT COUNT(*) FROM roles</sqlCheck>
         </preConditions>
@@ -20,7 +20,9 @@
             <column name="name" value="ROLE_VIEWER"/>
         </insert>
         <rollback>
-            <delete tableName="roles"/>
+            <delete tableName="roles">
+                <where>name IN ('ROLE_ADMIN', 'ROLE_ANALYST', 'ROLE_VIEWER')</where>
+            </delete>
         </rollback>
     </changeSet>
 
@@ -63,7 +65,9 @@
         </sql>
         <rollback>
             <sql>
-                DELETE FROM user_roles WHERE user_id = (SELECT id FROM users WHERE username = 'admin')
+                DELETE FROM user_roles 
+                WHERE user_id = (SELECT id FROM users WHERE username = 'admin')
+                  AND role_id = (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')
             </sql>
         </rollback>
     </changeSet>

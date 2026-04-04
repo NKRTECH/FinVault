@@ -22,22 +22,18 @@ public class JwtTokenProvider {
     public JwtTokenProvider(
             @Value("${spring.jwt.secret}") String secret,
             @Value("${spring.jwt.expiration}") long expirationMs) {
-        this.key = Keys.hmacShaKeyFor(secret.getBytes());
+        this.key = Keys.hmacShaKeyFor(secret.getBytes(java.nio.charset.StandardCharsets.UTF_8));
         this.expirationMs = expirationMs;
     }
 
     public String generateToken(Authentication authentication) {
         String username = authentication.getName();
-        String roles = authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(","));
-
+        
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expirationMs);
 
         return Jwts.builder()
                 .subject(username)
-                .claim("roles", roles)
                 .issuedAt(now)
                 .expiration(expiryDate)
                 .signWith(key)

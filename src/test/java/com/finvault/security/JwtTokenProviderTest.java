@@ -63,8 +63,8 @@ class JwtTokenProviderTest {
 
     @Test
     void shouldRejectExpiredToken() {
-        // Create provider with 0ms expiration (token expires immediately)
-        JwtTokenProvider expiredProvider = new JwtTokenProvider(TEST_SECRET, 0);
+        // Create provider with negative expiration to ensure it fails
+        JwtTokenProvider expiredProvider = new JwtTokenProvider(TEST_SECRET, -1000L);
         Authentication authentication = createAuthentication("testuser", "ROLE_VIEWER");
         String token = expiredProvider.generateToken(authentication);
 
