@@ -50,7 +50,7 @@ public class SecurityConfig {
                         .requestMatchers("/actuator/**").hasRole("ADMIN")
 
                         // User management — ADMIN only
-                        .requestMatchers("/api/v1/users/me").authenticated()
+                        .requestMatchers("/api/v1/users/me", "/api/v1/users/me/**").authenticated()
                         .requestMatchers("/api/v1/users/**").hasRole("ADMIN")
 
                         // Financial records
