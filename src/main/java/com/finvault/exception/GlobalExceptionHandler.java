@@ -121,7 +121,7 @@ public class GlobalExceptionHandler {
         log.warn("Type mismatch on {}: {}", request.getRequestURI(), ex.getMessage());
         String expectedType = ex.getRequiredType() != null ? ex.getRequiredType().getSimpleName() : "valid format";
         return buildErrorResponse(HttpStatus.BAD_REQUEST, 
-                String.format("Invalid value for parameter '%s'. Expected a varying format (e.g. %s)", ex.getName(), expectedType), request);
+                String.format("Invalid value for parameter '%s'. Expected format or type: %s", ex.getName(), expectedType), request);
     }
 
     @ExceptionHandler(Exception.class)
