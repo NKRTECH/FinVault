@@ -19,8 +19,10 @@ class RoleRepositoryTest {
     @Test
     void shouldFindRoleByName() {
         // Given
-        Role role = Role.builder().name(RoleName.ROLE_ADMIN).build();
-        roleRepository.save(role);
+        if (roleRepository.findByName(RoleName.ROLE_ADMIN).isEmpty()) {
+            Role role = Role.builder().name(RoleName.ROLE_ADMIN).build();
+            roleRepository.save(role);
+        }
 
         // When
         Optional<Role> found = roleRepository.findByName(RoleName.ROLE_ADMIN);
