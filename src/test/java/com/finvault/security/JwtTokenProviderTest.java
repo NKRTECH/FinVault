@@ -14,7 +14,7 @@ class JwtTokenProviderTest {
 
     private JwtTokenProvider jwtTokenProvider;
 
-    // A 256-bit (32-char) secret for testing
+    // A 256-bit (32-byte) secret for testing
     private static final String TEST_SECRET = "test-jwt-secret-key-minimum-32-chars!!";
     private static final long EXPIRATION_MS = 86400000; // 24 hours
 

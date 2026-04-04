@@ -51,7 +51,7 @@
     <!-- Seed admin user: admin / admin123 -->
     <changeSet id="005-2" author="finvault">
         <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM users WHERE username = 'admin'</sqlCheck>
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM users WHERE username = 'admin' OR email = 'admin@finvault.com'</sqlCheck>
         </preConditions>
         <insert tableName="users">
             <column name="username" value="admin"/>
@@ -73,6 +73,10 @@
     <!-- Assign ADMIN role to admin user -->
     <changeSet id="005-3" author="finvault">
         <preConditions onFail="MARK_RAN">
+            <!-- Ensure both user and role exist before attempting connection -->
+            <sqlCheck expectedResult="1">SELECT COUNT(*) FROM users WHERE username = 'admin'</sqlCheck>
+            <sqlCheck expectedResult="1">SELECT COUNT(*) FROM roles WHERE name = 'ROLE_ADMIN'</sqlCheck>
+            <!-- Ensure mapping doesn't exist already -->
             <sqlCheck expectedResult="0">
                 SELECT COUNT(*) FROM user_roles ur
                 JOIN users u ON ur.user_id = u.id
