@@ -63,10 +63,14 @@ class JwtTokenProviderTest {
 
     @Test
     void shouldRejectExpiredToken() {
-        // Create provider with negative expiration to ensure it fails
-        JwtTokenProvider expiredProvider = new JwtTokenProvider(TEST_SECRET, -1000L);
-        Authentication authentication = createAuthentication("testuser", "ROLE_VIEWER");
-        String token = expiredProvider.generateToken(authentication);
+        // Build a manually expired token
+        java.util.Date past = new java.util.Date(System.currentTimeMillis() - 10000);
+        String token = io.jsonwebtoken.Jwts.builder()
+                .subject("testuser")
+                .issuedAt(past)
+                .expiration(past)
+                .signWith(io.jsonwebtoken.security.Keys.hmacShaKeyFor(TEST_SECRET.getBytes(java.nio.charset.StandardCharsets.UTF_8)))
+                .compact();
 
         boolean isValid = jwtTokenProvider.validateToken(token);
 

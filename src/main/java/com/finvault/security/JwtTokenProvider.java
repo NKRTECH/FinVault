@@ -20,7 +20,19 @@ public class JwtTokenProvider {
     public JwtTokenProvider(
             @Value("${spring.jwt.secret}") String secret,
             @Value("${spring.jwt.expiration}") long expirationMs) {
-        this.key = Keys.hmacShaKeyFor(secret.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+        
+        if (secret == null || secret.isBlank()) {
+            throw new IllegalArgumentException("spring.jwt.secret must not be null or blank");
+        }
+        byte[] secretBytes = secret.getBytes(java.nio.charset.StandardCharsets.UTF_8);
+        if (secretBytes.length < 32) {
+            throw new IllegalArgumentException("spring.jwt.secret must be at least 32 bytes long when encoded as UTF-8 for HMAC-SHA256");
+        }
+        if (expirationMs <= 0) {
+            throw new IllegalArgumentException("spring.jwt.expiration must be greater than 0");
+        }
+
+        this.key = Keys.hmacShaKeyFor(secretBytes);
         this.expirationMs = expirationMs;
     }
 
