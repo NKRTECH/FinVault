@@ -35,7 +35,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(org.springframework.dao.DataIntegrityViolationException.class)
     public ResponseEntity<ApiErrorResponse> handleDataIntegrityViolation(
             org.springframework.dao.DataIntegrityViolationException ex, HttpServletRequest request) {
-        log.warn("Data integrity violation on {}: {}", request.getRequestURI(), ex.getMostSpecificCause().getMessage());
+        log.warn("Data integrity violation on {} ({})", request.getRequestURI(), ex.getClass().getSimpleName());
+        log.debug("Detailed data integrity violation for {}", request.getRequestURI(), ex);
         return buildErrorResponse(HttpStatus.CONFLICT, "A resource with this data already exists or is invalid.", request);
     }
 
