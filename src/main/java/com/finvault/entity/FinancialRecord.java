@@ -45,7 +45,7 @@ public class FinancialRecord {
 
     @Column(nullable = false)
     @Builder.Default
-    private Boolean deleted = false;
+    private boolean deleted = false;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
