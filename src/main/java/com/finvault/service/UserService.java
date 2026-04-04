@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -77,7 +78,7 @@ public class UserService {
         User user = findUserByIdOrThrow(id);
 
         if (user.getUsername().equals(currentUsername)) {
-            throw new IllegalArgumentException("You cannot change your own account status");
+            throw new AccessDeniedException("You cannot change your own account status");
         }
 
         user.setStatus(status);
@@ -114,7 +115,7 @@ public class UserService {
         User user = findUserByIdOrThrow(id);
 
         if (user.getUsername().equals(currentUsername)) {
-            throw new IllegalArgumentException("You cannot delete your own account");
+            throw new AccessDeniedException("You cannot delete your own account");
         }
 
         user.setStatus(UserStatus.INACTIVE);
