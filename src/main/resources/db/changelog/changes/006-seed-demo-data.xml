@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <!-- ═══════════════════════════════════════════════════════
+         Demo Users
+         All passwords: "password123" (BCrypt hash)
+         ═══════════════════════════════════════════════════════ -->
+
+    <!-- Analyst user -->
+    <changeSet id="006-1-analyst" author="finvault" context="dev,docker">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM users WHERE username = 'analyst' OR email = 'analyst@finvault.com'</sqlCheck>
+        </preConditions>
+        <insert tableName="users">
+            <column name="username" value="analyst"/>
+            <column name="email" value="analyst@finvault.com"/>
+            <column name="password" value="$2a$10$dXJ3SW6G7P50lGmMQgel2uB5pDQo6cKBU5Qk5D/GzXqRcVfVAO0Hy"/>
+            <column name="full_name" value="Jane Analyst"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueComputed="CURRENT_TIMESTAMP"/>
+        </insert>
+        <rollback>
+            <delete tableName="users"><where>username = 'analyst'</where></delete>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="006-1b-analyst-role" author="finvault" context="dev,docker">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <sqlCheck expectedResult="1">SELECT COUNT(*) FROM users WHERE username = 'analyst'</sqlCheck>
+                <sqlCheck expectedResult="1">SELECT COUNT(*) FROM roles WHERE name = 'ROLE_ANALYST'</sqlCheck>
+                <sqlCheck expectedResult="0">
+                    SELECT COUNT(*)
+                    FROM user_roles ur
+                    JOIN users u ON ur.user_id = u.id
+                    JOIN roles r ON ur.role_id = r.id
+                    WHERE u.username = 'analyst' AND r.name = 'ROLE_ANALYST'
+                </sqlCheck>
+            </and>
+        </preConditions>
+        <sql>
+            INSERT INTO user_roles (user_id, role_id)
+            SELECT u.id, r.id FROM users u, roles r
+            WHERE u.username = 'analyst' AND r.name = 'ROLE_ANALYST'
+        </sql>
+        <rollback>
+            <sql>
+                DELETE FROM user_roles
+                WHERE user_id = (SELECT id FROM users WHERE username = 'analyst')
+                  AND role_id = (SELECT id FROM roles WHERE name = 'ROLE_ANALYST')
+            </sql>
+        </rollback>
+    </changeSet>
+
+    <!-- Viewer user -->
+    <changeSet id="006-2-viewer" author="finvault" context="dev,docker">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM users WHERE username = 'viewer' OR email = 'viewer@finvault.com'</sqlCheck>
+        </preConditions>
+        <insert tableName="users">
+            <column name="username" value="viewer"/>
+            <column name="email" value="viewer@finvault.com"/>
+            <column name="password" value="$2a$10$dXJ3SW6G7P50lGmMQgel2uB5pDQo6cKBU5Qk5D/GzXqRcVfVAO0Hy"/>
+            <column name="full_name" value="Bob Viewer"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueComputed="CURRENT_TIMESTAMP"/>
+        </insert>
+        <rollback>
+            <delete tableName="users"><where>username = 'viewer'</where></delete>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="006-2b-viewer-role" author="finvault" context="dev,docker">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <sqlCheck expectedResult="1">SELECT COUNT(*) FROM users WHERE username = 'viewer'</sqlCheck>
+                <sqlCheck expectedResult="1">SELECT COUNT(*) FROM roles WHERE name = 'ROLE_VIEWER'</sqlCheck>
+                <sqlCheck expectedResult="0">
+                    SELECT COUNT(*)
+                    FROM user_roles ur
+                    JOIN users u ON ur.user_id = u.id
+                    JOIN roles r ON ur.role_id = r.id
+                    WHERE u.username = 'viewer' AND r.name = 'ROLE_VIEWER'
+                </sqlCheck>
+            </and>
+        </preConditions>
+        <sql>
+            INSERT INTO user_roles (user_id, role_id)
+            SELECT u.id, r.id FROM users u, roles r
+            WHERE u.username = 'viewer' AND r.name = 'ROLE_VIEWER'
+        </sql>
+        <rollback>
+            <sql>
+                DELETE FROM user_roles
+                WHERE user_id = (SELECT id FROM users WHERE username = 'viewer')
+                  AND role_id = (SELECT id FROM roles WHERE name = 'ROLE_VIEWER')
+            </sql>
+        </rollback>
+    </changeSet>
+
+    <!-- ═══════════════════════════════════════════════════════
+         Financial Records — 6 months of realistic data
+         (30 records across diverse categories)
+         All records created by admin user (id from subquery)
+         ═══════════════════════════════════════════════════════ -->
+
+    <changeSet id="006-3-financial-records" author="finvault" context="dev,docker">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <sqlCheck expectedResult="1">SELECT COUNT(*) FROM users WHERE username = 'admin'</sqlCheck>
+                <sqlCheck expectedResult="0">
+                    SELECT COUNT(*)
+                    FROM financial_records
+                    WHERE created_by_id = (SELECT id FROM users WHERE username = 'admin')
+                      AND date BETWEEN '2025-01-01' AND '2025-06-30'
+                      AND description IN (
+                        'Monthly salary - January', 'Monthly salary - February', 'Monthly salary - March', 'Monthly salary - April', 'Monthly salary - May', 'Monthly salary - June',
+                        'Website redesign project for client', 'Logo design for startup', 'Dividend payment from ETF portfolio', 'Tax refund for overpaid withholding',
+                        'Monthly apartment rent - January', 'Monthly apartment rent - February', 'Monthly apartment rent - March', 'Monthly apartment rent - April', 'Monthly apartment rent - May', 'Monthly apartment rent - June',
+                        'Weekly grocery shopping at Costco', 'Organic produce and pantry restock', 'Monthly grocery run plus household supplies',
+                        'Electric bill - January', 'Internet and phone bundle', 'Electric bill - March (winter usage)',
+                        'Monthly transit pass', 'Uber rides to client meetings',
+                        'Dental cleaning and checkup', 'Prescription medication refill',
+                        'Annual streaming service bundle', 'Concert tickets',
+                        'Online course - Cloud Architecture', 'Quarterly health insurance premium'
+                      )
+                </sqlCheck>
+            </and>
+        </preConditions>
+
+        <!-- ── INCOME records ─────────────────────────────── -->
+        <sql>
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 5500.00, 'INCOME', 'Salary', 'Monthly salary - January', '2025-01-15', u.id, false, '2025-01-15 09:00:00', '2025-01-15 09:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 5500.00, 'INCOME', 'Salary', 'Monthly salary - February', '2025-02-15', u.id, false, '2025-02-15 09:00:00', '2025-02-15 09:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 5500.00, 'INCOME', 'Salary', 'Monthly salary - March', '2025-03-15', u.id, false, '2025-03-15 09:00:00', '2025-03-15 09:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 5500.00, 'INCOME', 'Salary', 'Monthly salary - April', '2025-04-15', u.id, false, '2025-04-15 09:00:00', '2025-04-15 09:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 5500.00, 'INCOME', 'Salary', 'Monthly salary - May', '2025-05-15', u.id, false, '2025-05-15 09:00:00', '2025-05-15 09:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 5500.00, 'INCOME', 'Salary', 'Monthly salary - June', '2025-06-15', u.id, false, '2025-06-15 09:00:00', '2025-06-15 09:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 1200.00, 'INCOME', 'Freelance', 'Website redesign project for client', '2025-01-28', u.id, false, '2025-01-28 14:30:00', '2025-01-28 14:30:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 800.00, 'INCOME', 'Freelance', 'Logo design for startup', '2025-03-10', u.id, false, '2025-03-10 11:00:00', '2025-03-10 11:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 350.00, 'INCOME', 'Investment', 'Dividend payment from ETF portfolio', '2025-04-01', u.id, false, '2025-04-01 16:00:00', '2025-04-01 16:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 150.00, 'INCOME', 'Refund', 'Tax refund for overpaid withholding', '2025-02-20', u.id, false, '2025-02-20 10:00:00', '2025-02-20 10:00:00' FROM users u WHERE u.username = 'admin';
+
+            <!-- ── EXPENSE records ─────────────────────────── -->
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 1800.00, 'EXPENSE', 'Rent', 'Monthly apartment rent - January', '2025-01-01', u.id, false, '2025-01-01 08:00:00', '2025-01-01 08:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 1800.00, 'EXPENSE', 'Rent', 'Monthly apartment rent - February', '2025-02-01', u.id, false, '2025-02-01 08:00:00', '2025-02-01 08:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 1800.00, 'EXPENSE', 'Rent', 'Monthly apartment rent - March', '2025-03-01', u.id, false, '2025-03-01 08:00:00', '2025-03-01 08:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 1800.00, 'EXPENSE', 'Rent', 'Monthly apartment rent - April', '2025-04-01', u.id, false, '2025-04-01 08:00:00', '2025-04-01 08:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 1800.00, 'EXPENSE', 'Rent', 'Monthly apartment rent - May', '2025-05-01', u.id, false, '2025-05-01 08:00:00', '2025-05-01 08:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 1800.00, 'EXPENSE', 'Rent', 'Monthly apartment rent - June', '2025-06-01', u.id, false, '2025-06-01 08:00:00', '2025-06-01 08:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 420.00, 'EXPENSE', 'Groceries', 'Weekly grocery shopping at Costco', '2025-01-08', u.id, false, '2025-01-08 17:30:00', '2025-01-08 17:30:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 385.00, 'EXPENSE', 'Groceries', 'Organic produce and pantry restock', '2025-02-12', u.id, false, '2025-02-12 18:00:00', '2025-02-12 18:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 450.00, 'EXPENSE', 'Groceries', 'Monthly grocery run plus household supplies', '2025-04-05', u.id, false, '2025-04-05 16:45:00', '2025-04-05 16:45:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 120.00, 'EXPENSE', 'Utilities', 'Electric bill - January', '2025-01-20', u.id, false, '2025-01-20 10:00:00', '2025-01-20 10:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 95.00, 'EXPENSE', 'Utilities', 'Internet and phone bundle', '2025-02-05', u.id, false, '2025-02-05 09:00:00', '2025-02-05 09:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 140.00, 'EXPENSE', 'Utilities', 'Electric bill - March (winter usage)', '2025-03-22', u.id, false, '2025-03-22 10:30:00', '2025-03-22 10:30:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 65.00, 'EXPENSE', 'Transportation', 'Monthly transit pass', '2025-01-02', u.id, false, '2025-01-02 07:30:00', '2025-01-02 07:30:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 48.50, 'EXPENSE', 'Transportation', 'Uber rides to client meetings', '2025-03-18', u.id, false, '2025-03-18 19:00:00', '2025-03-18 19:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 250.00, 'EXPENSE', 'Healthcare', 'Dental cleaning and checkup', '2025-02-14', u.id, false, '2025-02-14 11:00:00', '2025-02-14 11:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 45.00, 'EXPENSE', 'Healthcare', 'Prescription medication refill', '2025-05-10', u.id, false, '2025-05-10 12:00:00', '2025-05-10 12:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 89.99, 'EXPENSE', 'Entertainment', 'Annual streaming service bundle', '2025-01-05', u.id, false, '2025-01-05 20:00:00', '2025-01-05 20:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 75.00, 'EXPENSE', 'Entertainment', 'Concert tickets', '2025-04-20', u.id, false, '2025-04-20 21:00:00', '2025-04-20 21:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 320.00, 'EXPENSE', 'Education', 'Online course - Cloud Architecture', '2025-03-01', u.id, false, '2025-03-01 10:00:00', '2025-03-01 10:00:00' FROM users u WHERE u.username = 'admin';
+
+            INSERT INTO financial_records (amount, type, category, description, date, created_by_id, deleted, created_at, updated_at)
+            SELECT 500.00, 'EXPENSE', 'Insurance', 'Quarterly health insurance premium', '2025-01-10', u.id, false, '2025-01-10 08:00:00', '2025-01-10 08:00:00' FROM users u WHERE u.username = 'admin';
+        </sql>
+
+        <rollback>
+            <sql>
+                DELETE FROM financial_records
+                WHERE created_by_id = (SELECT id FROM users WHERE username = 'admin')
+                  AND date BETWEEN '2025-01-01' AND '2025-06-30'
+                  AND description IN (
+                    'Monthly salary - January', 'Monthly salary - February', 'Monthly salary - March', 'Monthly salary - April', 'Monthly salary - May', 'Monthly salary - June',
+                    'Website redesign project for client', 'Logo design for startup', 'Dividend payment from ETF portfolio', 'Tax refund for overpaid withholding',
+                    'Monthly apartment rent - January', 'Monthly apartment rent - February', 'Monthly apartment rent - March', 'Monthly apartment rent - April', 'Monthly apartment rent - May', 'Monthly apartment rent - June',
+                    'Weekly grocery shopping at Costco', 'Organic produce and pantry restock', 'Monthly grocery run plus household supplies',
+                    'Electric bill - January', 'Internet and phone bundle', 'Electric bill - March (winter usage)',
+                    'Monthly transit pass', 'Uber rides to client meetings',
+                    'Dental cleaning and checkup', 'Prescription medication refill',
+                    'Annual streaming service bundle', 'Concert tickets',
+                    'Online course - Cloud Architecture', 'Quarterly health insurance premium'
+                  )
+            </sql>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
