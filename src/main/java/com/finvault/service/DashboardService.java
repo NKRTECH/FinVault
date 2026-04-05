@@ -1,6 +1,9 @@
 package com.finvault.service;
 
-import com.finvault.dto.response.*;
+import com.finvault.dto.response.CategoryBreakdownResponse;
+import com.finvault.dto.response.DashboardSummaryResponse;
+import com.finvault.dto.response.MonthlyTrendResponse;
+import com.finvault.dto.response.RecentActivityResponse;
 import com.finvault.entity.FinancialRecord;
 import com.finvault.enums.RecordType;
 import com.finvault.repository.FinancialRecordRepository;
@@ -12,7 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -90,8 +97,8 @@ public class DashboardService {
         // Group rows by year-month, each month can have up to 2 rows (INCOME, EXPENSE)
         Map<String, BigDecimal[]> monthData = new LinkedHashMap<>();
         for (Object[] row : rows) {
-            int year = (Integer) row[0];
-            int month = (Integer) row[1];
+            int year = ((Number) row[0]).intValue();
+            int month = ((Number) row[1]).intValue();
             RecordType type = (RecordType) row[2];
             BigDecimal sum = (BigDecimal) row[3];
 

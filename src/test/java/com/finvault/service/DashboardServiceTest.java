@@ -1,6 +1,9 @@
 package com.finvault.service;
 
-import com.finvault.dto.response.*;
+import com.finvault.dto.response.CategoryBreakdownResponse;
+import com.finvault.dto.response.DashboardSummaryResponse;
+import com.finvault.dto.response.MonthlyTrendResponse;
+import com.finvault.dto.response.RecentActivityResponse;
 import com.finvault.entity.FinancialRecord;
 import com.finvault.entity.User;
 import com.finvault.enums.RecordType;

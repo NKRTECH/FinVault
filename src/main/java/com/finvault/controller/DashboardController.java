@@ -1,6 +1,10 @@
 package com.finvault.controller;
 
-import com.finvault.dto.response.*;
+import com.finvault.dto.response.ApiResponse;
+import com.finvault.dto.response.CategoryBreakdownResponse;
+import com.finvault.dto.response.DashboardSummaryResponse;
+import com.finvault.dto.response.MonthlyTrendResponse;
+import com.finvault.dto.response.RecentActivityResponse;
 import com.finvault.service.DashboardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;

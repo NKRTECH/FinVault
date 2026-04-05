@@ -1,7 +1,10 @@
 package com.finvault.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.finvault.dto.response.*;
+import com.finvault.dto.response.ApiResponse;
+import com.finvault.dto.response.CategoryBreakdownResponse;
+import com.finvault.dto.response.DashboardSummaryResponse;
+import com.finvault.dto.response.MonthlyTrendResponse;
+import com.finvault.dto.response.RecentActivityResponse;
 import com.finvault.exception.GlobalExceptionHandler;
 import com.finvault.security.CustomUserDetailsService;
 import com.finvault.security.JwtAuthenticationFilter;
