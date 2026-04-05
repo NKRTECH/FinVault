@@ -5,3 +5,5 @@ spring:
     password: ${DB_PASSWORD}
   jpa:
     show-sql: true
+  liquibase:
+    contexts: dev

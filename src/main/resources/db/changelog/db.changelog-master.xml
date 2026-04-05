@@ -13,5 +13,6 @@
 
     <!-- Seed data -->
     <include file="changes/005-seed-roles-and-admin.xml" relativeToChangelogFile="true"/>
+    <include file="changes/006-seed-demo-data.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
