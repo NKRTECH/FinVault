@@ -7,6 +7,9 @@ import com.finvault.dto.response.ApiResponse;
 import com.finvault.dto.response.UserResponse;
 import com.finvault.enums.UserStatus;
 import com.finvault.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -19,6 +22,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
+@Tag(name = "User Management", description = "User profile, admin user CRUD, roles, and status management")
+@SecurityRequirement(name = "bearerAuth")
 public class UserController {
 
     private final UserService userService;
@@ -27,6 +32,7 @@ public class UserController {
 
     @GetMapping("/me")
     @PreAuthorize("isAuthenticated()")
+    @Operation(summary = "Get current user", description = "Returns the authenticated user's profile")
     public ResponseEntity<ApiResponse<UserResponse>> getCurrentUser() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         UserResponse response = userService.getCurrentUser(username);
@@ -35,6 +41,7 @@ public class UserController {
 
     @PutMapping("/me/password")
     @PreAuthorize("isAuthenticated()")
+    @Operation(summary = "Change password", description = "Change the authenticated user's password")
     public ResponseEntity<ApiResponse<Void>> changePassword(
             @Valid @RequestBody PasswordChangeRequest request) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -46,6 +53,7 @@ public class UserController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "List all users", description = "Paginated list of all users (ADMIN only)")
     public ResponseEntity<ApiResponse<Page<UserResponse>>> getAllUsers(Pageable pageable) {
         Page<UserResponse> users = userService.getAllUsers(pageable);
         return ResponseEntity.ok(ApiResponse.success("Users retrieved successfully", users));
@@ -53,6 +61,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Get user by ID", description = "Retrieve a specific user (ADMIN only)")
     public ResponseEntity<ApiResponse<UserResponse>> getUserById(@PathVariable Long id) {
         UserResponse response = userService.getUserById(id);
         return ResponseEntity.ok(ApiResponse.success("User retrieved successfully", response));
@@ -60,6 +69,7 @@ public class UserController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Update user", description = "Update user details (ADMIN only)")
     public ResponseEntity<ApiResponse<UserResponse>> updateUser(
             @PathVariable Long id,
             @Valid @RequestBody UserUpdateRequest request) {
@@ -69,6 +79,7 @@ public class UserController {
 
     @PatchMapping("/{id}/status")
     @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Update user status", description = "Set user to ACTIVE, INACTIVE, or SUSPENDED (ADMIN only)")
     public ResponseEntity<ApiResponse<UserResponse>> updateUserStatus(
             @PathVariable Long id,
             @RequestParam UserStatus status) {
@@ -79,6 +90,7 @@ public class UserController {
 
     @PatchMapping("/{id}/roles")
     @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Assign roles", description = "Assign roles to a user (ADMIN only)")
     public ResponseEntity<ApiResponse<UserResponse>> assignRoles(
             @PathVariable Long id,
             @Valid @RequestBody RoleAssignRequest request) {
@@ -88,6 +100,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Delete user", description = "Delete a user account (ADMIN only, cannot self-delete)")
     public ResponseEntity<ApiResponse<Void>> deleteUser(@PathVariable Long id) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         userService.deleteUser(id, username);

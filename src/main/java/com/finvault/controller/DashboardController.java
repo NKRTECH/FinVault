@@ -6,6 +6,9 @@ import com.finvault.dto.response.DashboardSummaryResponse;
 import com.finvault.dto.response.MonthlyTrendResponse;
 import com.finvault.dto.response.RecentActivityResponse;
 import com.finvault.service.DashboardService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +24,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/dashboard")
 @RequiredArgsConstructor
+@Tag(name = "Dashboard Analytics", description = "Aggregate financial summaries, trends, and breakdowns")
+@SecurityRequirement(name = "bearerAuth")
 public class DashboardController {
 
     private final DashboardService dashboardService;
 
     @GetMapping("/summary")
     @PreAuthorize("hasAnyRole('ANALYST', 'ADMIN')")
+    @Operation(summary = "Dashboard summary", description = "Total income, expenses, balance, and transaction count")
     public ResponseEntity<ApiResponse<DashboardSummaryResponse>> getSummary(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
@@ -36,6 +42,7 @@ public class DashboardController {
 
     @GetMapping("/category-breakdown")
     @PreAuthorize("hasAnyRole('ANALYST', 'ADMIN')")
+    @Operation(summary = "Category breakdown", description = "Spending breakdown by category with percentages")
     public ResponseEntity<ApiResponse<List<CategoryBreakdownResponse>>> getCategoryBreakdown(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
@@ -45,6 +52,7 @@ public class DashboardController {
 
     @GetMapping("/monthly-trend")
     @PreAuthorize("hasAnyRole('ANALYST', 'ADMIN')")
+    @Operation(summary = "Monthly trend", description = "Monthly income vs expense with running balance")
     public ResponseEntity<ApiResponse<List<MonthlyTrendResponse>>> getMonthlyTrend(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
@@ -54,6 +62,7 @@ public class DashboardController {
 
     @GetMapping("/recent-activity")
     @PreAuthorize("hasAnyRole('VIEWER', 'ANALYST', 'ADMIN')")
+    @Operation(summary = "Recent activity", description = "Last 10 financial transactions")
     public ResponseEntity<ApiResponse<List<RecentActivityResponse>>> getRecentActivity() {
         List<RecentActivityResponse> activity = dashboardService.getRecentActivity();
         return ResponseEntity.ok(ApiResponse.success("Recent activity retrieved successfully", activity));
