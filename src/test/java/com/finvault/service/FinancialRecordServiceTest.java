@@ -221,7 +221,8 @@ class FinancialRecordServiceTest {
     @Test
     void updateRecord_shouldUpdateAndReturn() {
         when(recordRepository.findById(1L)).thenReturn(Optional.of(testRecord));
-        when(recordRepository.save(any(FinancialRecord.class))).thenReturn(testRecord);
+        // Mock save to return the modified record that was passed in
+        when(recordRepository.save(any(FinancialRecord.class))).thenAnswer(i -> i.getArguments()[0]);
 
         FinancialRecordRequest updateReq = new FinancialRecordRequest(
                 new BigDecimal("300.00"), RecordType.EXPENSE, "Dining",
@@ -229,8 +230,20 @@ class FinancialRecordServiceTest {
 
         FinancialRecordResponse response = recordService.updateRecord(1L, updateReq);
 
+        // Verify response matches the update request
         assertThat(response).isNotNull();
-        verify(recordRepository).save(any(FinancialRecord.class));
+        assertThat(response.getAmount()).isEqualByComparingTo("300.00");
+        assertThat(response.getCategory()).isEqualTo("Dining");
+        assertThat(response.getDescription()).isEqualTo("Restaurant dinner");
+        assertThat(response.getDate()).isEqualTo(LocalDate.of(2026, 3, 20));
+
+        // Verify that save was called with an entity containing the updated fields
+        verify(recordRepository).save(argThat(rec -> 
+                rec.getAmount().compareTo(new BigDecimal("300.00")) == 0 &&
+                rec.getCategory().equals("Dining") &&
+                rec.getDescription().equals("Restaurant dinner") &&
+                rec.getDate().equals(LocalDate.of(2026, 3, 20))
+        ));
     }
 
     @Test
