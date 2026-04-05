@@ -24,5 +24,8 @@ scrape_configs:
             logger: logger_name
             message: message
             timestamp: "@timestamp"
+      - timestamp:
+          source: timestamp
+          format: RFC3339Nano
       - labels:
           level:

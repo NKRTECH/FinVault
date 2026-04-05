@@ -3,6 +3,9 @@
 
     <springProperty scope="context" name="APP_NAME" source="spring.application.name" defaultValue="finvault"/>
 
+    <!-- Include Spring Boot defaults for color converters (%highlight, %cyan, etc.) -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
     <!-- ── Dev Profile: Human-readable console ──────────────── -->
     <springProfile name="!docker">
         <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">

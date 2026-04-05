@@ -26,6 +26,7 @@ management:
   endpoint:
     health:
       show-details: when-authorized
+      roles: ADMIN
     loggers:
       enabled: true
   metrics:
