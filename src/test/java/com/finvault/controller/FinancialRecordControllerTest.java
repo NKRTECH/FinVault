@@ -215,9 +215,6 @@ class FinancialRecordControllerTest {
 
     @Test
     void deleteRecord_shouldReturn404WhenNotFound() throws Exception {
-        when(recordService.getRecordById(999L))
-                .thenThrow(new ResourceNotFoundException("FinancialRecord", "id", "999"));
-        // deleteRecord also throws ResourceNotFoundException
         org.mockito.Mockito.doThrow(new ResourceNotFoundException("FinancialRecord", "id", "999"))
                 .when(recordService).deleteRecord(999L);
 
