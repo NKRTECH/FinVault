@@ -5,7 +5,6 @@ import com.finvault.dto.response.AiCategorizationResponse;
 import com.finvault.dto.response.AiInsightsResponse;
 import com.finvault.dto.response.ApiResponse;
 import com.finvault.dto.response.FinancialRecordResponse;
-import com.finvault.enums.RecordType;
 import com.finvault.service.AiService;
 import com.finvault.service.FinancialRecordService;
 import jakarta.validation.Valid;
@@ -42,7 +41,7 @@ public class AiController {
     public ResponseEntity<ApiResponse<AiInsightsResponse>> getInsights() {
         // Fetch the 50 most recent non-deleted records for analysis
         List<FinancialRecordResponse> records = recordService.getAllRecords(
-                PageRequest.of(0, 50), null, null, null, null, null, null
+                PageRequest.of(0, 50, org.springframework.data.domain.Sort.by(org.springframework.data.domain.Sort.Direction.DESC, "createdAt")), null, null, null, null, null, null
         ).getContent();
 
         AiInsightsResponse response = aiService.getFinancialInsights(records);

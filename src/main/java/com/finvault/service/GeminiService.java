@@ -17,13 +17,16 @@ public class GeminiService {
     private final WebClient webClient;
     private final String apiKey;
     private final int timeoutSeconds;
+    private final com.fasterxml.jackson.databind.ObjectMapper objectMapper;
 
     public GeminiService(WebClient geminiWebClient,
                          @Qualifier("geminiApiKey") String geminiApiKey,
-                         @Qualifier("geminiTimeoutSeconds") int geminiTimeoutSeconds) {
+                         @Qualifier("geminiTimeoutSeconds") int geminiTimeoutSeconds,
+                         com.fasterxml.jackson.databind.ObjectMapper objectMapper) {
         this.webClient = geminiWebClient;
         this.apiKey = geminiApiKey;
         this.timeoutSeconds = geminiTimeoutSeconds;
+        this.objectMapper = objectMapper;
     }
 
     public String generateContent(String prompt) {
@@ -46,10 +49,10 @@ public class GeminiService {
 
             return extractTextFromResponse(response);
         } catch (WebClientResponseException e) {
-            log.error("Gemini API error: status={}, body={}", e.getStatusCode(), e.getResponseBodyAsString());
+            log.error("Gemini API error: status={}, body={}", e.getStatusCode(), e.getResponseBodyAsString(), e);
             return "AI service is temporarily unavailable. Please try again later.";
         } catch (Exception e) {
-            log.error("Failed to call Gemini API: {}", e.getMessage());
+            log.error("Failed to call Gemini API: {}", e.getMessage(), e);
             return "AI service is temporarily unavailable. Please try again later.";
         }
     }
@@ -61,24 +64,24 @@ public class GeminiService {
 
         try {
             // Parse: { "candidates": [{ "content": { "parts": [{ "text": "..." }] } }] }
-            com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
-            com.fasterxml.jackson.databind.JsonNode root = mapper.readTree(response);
+            com.fasterxml.jackson.databind.JsonNode root = objectMapper.readTree(response);
             com.fasterxml.jackson.databind.JsonNode candidates = root.path("candidates");
 
             if (candidates.isArray() && !candidates.isEmpty()) {
-                com.fasterxml.jackson.databind.JsonNode text = candidates.get(0)
-                        .path("content")
-                        .path("parts")
-                        .get(0)
-                        .path("text");
-                if (!text.isMissingNode()) {
-                    return text.asText().trim();
+                com.fasterxml.jackson.databind.JsonNode firstCandidate = candidates.path(0);
+                com.fasterxml.jackson.databind.JsonNode parts = firstCandidate.path("content").path("parts");
+
+                if (parts.isArray() && !parts.isEmpty()) {
+                    com.fasterxml.jackson.databind.JsonNode text = parts.path(0).path("text");
+                    if (!text.isMissingNode()) {
+                        return text.asText().trim();
+                    }
                 }
             }
 
             return "Unable to parse AI response.";
         } catch (Exception e) {
-            log.error("Failed to parse Gemini response: {}", e.getMessage());
+            log.error("Failed to parse Gemini response: {}", e.getMessage(), e);
             return "Unable to parse AI response.";
         }
     }

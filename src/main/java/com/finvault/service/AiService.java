@@ -24,7 +24,7 @@ public class AiService {
                 "Transaction: " + description;
 
         String category = geminiService.generateContent(prompt);
-        log.info("AI categorization: '{}' -> '{}'", description, category);
+        log.info("AI categorization generated with category '{}'", category);
 
         return AiCategorizationResponse.builder()
                 .description(description)
