@@ -13,7 +13,7 @@
     <!-- Analyst user -->
     <changeSet id="006-1-analyst" author="finvault" context="dev,docker">
         <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM users WHERE username = 'analyst'</sqlCheck>
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM users WHERE username = 'analyst' OR email = 'analyst@finvault.com'</sqlCheck>
         </preConditions>
         <insert tableName="users">
             <column name="username" value="analyst"/>
@@ -24,21 +24,42 @@
             <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
             <column name="updated_at" valueComputed="CURRENT_TIMESTAMP"/>
         </insert>
+        <rollback>
+            <delete tableName="users"><where>username = 'analyst'</where></delete>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="006-1b-analyst-role" author="finvault" context="dev,docker">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <sqlCheck expectedResult="1">SELECT COUNT(*) FROM users WHERE username = 'analyst'</sqlCheck>
+                <sqlCheck expectedResult="0">
+                    SELECT COUNT(*)
+                    FROM user_roles ur
+                    JOIN users u ON ur.user_id = u.id
+                    JOIN roles r ON ur.role_id = r.id
+                    WHERE u.username = 'analyst' AND r.name = 'ROLE_ANALYST'
+                </sqlCheck>
+            </and>
+        </preConditions>
         <sql>
             INSERT INTO user_roles (user_id, role_id)
             SELECT u.id, r.id FROM users u, roles r
             WHERE u.username = 'analyst' AND r.name = 'ROLE_ANALYST'
         </sql>
         <rollback>
-            <sql>DELETE FROM user_roles WHERE user_id = (SELECT id FROM users WHERE username = 'analyst')</sql>
-            <delete tableName="users"><where>username = 'analyst'</where></delete>
+            <sql>
+                DELETE FROM user_roles
+                WHERE user_id = (SELECT id FROM users WHERE username = 'analyst')
+                  AND role_id = (SELECT id FROM roles WHERE name = 'ROLE_ANALYST')
+            </sql>
         </rollback>
     </changeSet>
 
     <!-- Viewer user -->
     <changeSet id="006-2-viewer" author="finvault" context="dev,docker">
         <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM users WHERE username = 'viewer'</sqlCheck>
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM users WHERE username = 'viewer' OR email = 'viewer@finvault.com'</sqlCheck>
         </preConditions>
         <insert tableName="users">
             <column name="username" value="viewer"/>
@@ -49,14 +70,35 @@
             <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
             <column name="updated_at" valueComputed="CURRENT_TIMESTAMP"/>
         </insert>
+        <rollback>
+            <delete tableName="users"><where>username = 'viewer'</where></delete>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="006-2b-viewer-role" author="finvault" context="dev,docker">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <sqlCheck expectedResult="1">SELECT COUNT(*) FROM users WHERE username = 'viewer'</sqlCheck>
+                <sqlCheck expectedResult="0">
+                    SELECT COUNT(*)
+                    FROM user_roles ur
+                    JOIN users u ON ur.user_id = u.id
+                    JOIN roles r ON ur.role_id = r.id
+                    WHERE u.username = 'viewer' AND r.name = 'ROLE_VIEWER'
+                </sqlCheck>
+            </and>
+        </preConditions>
         <sql>
             INSERT INTO user_roles (user_id, role_id)
             SELECT u.id, r.id FROM users u, roles r
             WHERE u.username = 'viewer' AND r.name = 'ROLE_VIEWER'
         </sql>
         <rollback>
-            <sql>DELETE FROM user_roles WHERE user_id = (SELECT id FROM users WHERE username = 'viewer')</sql>
-            <delete tableName="users"><where>username = 'viewer'</where></delete>
+            <sql>
+                DELETE FROM user_roles
+                WHERE user_id = (SELECT id FROM users WHERE username = 'viewer')
+                  AND role_id = (SELECT id FROM roles WHERE name = 'ROLE_VIEWER')
+            </sql>
         </rollback>
     </changeSet>
 
@@ -68,7 +110,15 @@
 
     <changeSet id="006-3-financial-records" author="finvault" context="dev,docker">
         <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM financial_records</sqlCheck>
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM financial_records
+                WHERE amount = 5500.00
+                  AND type = 'INCOME'
+                  AND category = 'Salary'
+                  AND description = 'Monthly salary - January'
+                  AND date = '2025-01-15'
+            </sqlCheck>
         </preConditions>
 
         <!-- ── INCOME records ─────────────────────────────── -->
@@ -167,7 +217,11 @@
         </sql>
 
         <rollback>
-            <sql>DELETE FROM financial_records WHERE created_by_id = (SELECT id FROM users WHERE username = 'admin')</sql>
+            <sql>
+                DELETE FROM financial_records
+                WHERE created_by_id = (SELECT id FROM users WHERE username = 'admin')
+                  AND date BETWEEN '2025-01-01' AND '2025-06-30'
+            </sql>
         </rollback>
     </changeSet>
 
