@@ -5,6 +5,8 @@ import com.finvault.dto.response.ApiResponse;
 import com.finvault.dto.response.FinancialRecordResponse;
 import com.finvault.enums.RecordType;
 import com.finvault.service.FinancialRecordService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,6 +24,7 @@ import java.time.LocalDate;
 @RestController
 @RequestMapping("/api/v1/records")
 @RequiredArgsConstructor
+@Tag(name = "Financial Records", description = "CRUD operations for income and expense records")
 public class FinancialRecordController {
 
     private final FinancialRecordService recordService;
@@ -30,6 +33,7 @@ public class FinancialRecordController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Create record", description = "Create a new financial record (ADMIN only)")
     public ResponseEntity<ApiResponse<FinancialRecordResponse>> createRecord(
             @Valid @RequestBody FinancialRecordRequest request) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -40,6 +44,7 @@ public class FinancialRecordController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Update record", description = "Update an existing financial record (ADMIN only)")
     public ResponseEntity<ApiResponse<FinancialRecordResponse>> updateRecord(
             @PathVariable Long id,
             @Valid @RequestBody FinancialRecordRequest request) {
@@ -49,6 +54,7 @@ public class FinancialRecordController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Delete record", description = "Soft-delete a financial record (ADMIN only)")
     public ResponseEntity<ApiResponse<Void>> deleteRecord(@PathVariable Long id) {
         recordService.deleteRecord(id);
         return ResponseEntity.ok(ApiResponse.success("Record deleted successfully", null));
@@ -58,6 +64,7 @@ public class FinancialRecordController {
 
     @GetMapping
     @PreAuthorize("hasAnyRole('VIEWER', 'ANALYST', 'ADMIN')")
+    @Operation(summary = "List records", description = "Paginated list with optional type, category, date, and amount filters")
     public ResponseEntity<ApiResponse<Page<FinancialRecordResponse>>> getAllRecords(
             Pageable pageable,
             @RequestParam(required = false) RecordType type,
@@ -73,6 +80,7 @@ public class FinancialRecordController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('VIEWER', 'ANALYST', 'ADMIN')")
+    @Operation(summary = "Get record by ID", description = "Retrieve a single financial record")
     public ResponseEntity<ApiResponse<FinancialRecordResponse>> getRecordById(@PathVariable Long id) {
         FinancialRecordResponse response = recordService.getRecordById(id);
         return ResponseEntity.ok(ApiResponse.success("Record retrieved successfully", response));

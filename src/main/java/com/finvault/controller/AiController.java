@@ -7,6 +7,8 @@ import com.finvault.dto.response.ApiResponse;
 import com.finvault.dto.response.FinancialRecordResponse;
 import com.finvault.service.AiService;
 import com.finvault.service.FinancialRecordService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/ai")
 @RequiredArgsConstructor
+@Tag(name = "AI Features", description = "Gemini-powered transaction categorization and financial insights")
 public class AiController {
 
     private final AiService aiService;
@@ -30,6 +33,7 @@ public class AiController {
 
     @PostMapping("/categorize")
     @PreAuthorize("hasAnyRole('ANALYST', 'ADMIN')")
+    @Operation(summary = "Categorize transaction", description = "AI-categorize a transaction description into a spending category")
     public ResponseEntity<ApiResponse<AiCategorizationResponse>> categorize(
             @Valid @RequestBody AiCategorizationRequest request) {
         AiCategorizationResponse response = aiService.categorize(request.getDescription());
@@ -38,6 +42,7 @@ public class AiController {
 
     @GetMapping("/insights")
     @PreAuthorize("hasAnyRole('ANALYST', 'ADMIN')")
+    @Operation(summary = "Financial insights", description = "AI-generated analysis and recommendations based on recent transactions")
     public ResponseEntity<ApiResponse<AiInsightsResponse>> getInsights() {
         // Fetch the 50 most recent non-deleted records for analysis
         List<FinancialRecordResponse> records = recordService.getAllRecords(
