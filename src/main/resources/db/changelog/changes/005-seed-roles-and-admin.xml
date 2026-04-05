@@ -57,7 +57,7 @@
             <column name="username" value="admin"/>
             <column name="email" value="admin@finvault.com"/>
             <!-- BCrypt hash of 'admin123' -->
-            <column name="password" value="$2a$10$EqKcp1WFKpmMaGbEYOAOxuSorMnEMmVBCcGmHDpDQsqqILutqmyRa"/>
+            <column name="password" value="$2a$10$XVXZsa1.Rb2aZcbHy2tlaeS6VsvZneu9Fh4N/OnMsIvP.1WaZTdri"/>
             <column name="full_name" value="System Administrator"/>
             <column name="status" value="ACTIVE"/>
             <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
