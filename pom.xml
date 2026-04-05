@@ -34,6 +34,7 @@
 		<sonar.token>${env.SONAR_TOKEN}</sonar.token>
 		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 		<sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+		<!-- Note: JaCoCo and SonarQube exclusions are defined separately here because Sonar requires a comma-separated list of Ant patterns relative to source, whereas JaCoCo requires explicit XML <exclude> elements relative to compiled classes. -->
 		<sonar.coverage.exclusions>
 			**/dto/**,
 			**/entity/**,
