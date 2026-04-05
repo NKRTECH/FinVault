@@ -18,3 +18,8 @@ spring:
 management:
   server:
     port: 0
+
+gemini:
+  api:
+    key: "test"
+    timeout: 5
