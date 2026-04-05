@@ -64,6 +64,10 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/dashboard/**")
                                 .hasAnyRole("ANALYST", "ADMIN")
 
+                        // AI endpoints
+                        .requestMatchers("/api/v1/ai/**")
+                                .hasAnyRole("ANALYST", "ADMIN")
+
                         // All other requests require authentication
                         .anyRequest().authenticated()
                 )
