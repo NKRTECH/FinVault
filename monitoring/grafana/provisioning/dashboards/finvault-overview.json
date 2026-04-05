@@ -10,7 +10,7 @@
       "title": "HTTP Request Rate",
       "type": "timeseries",
       "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "finvault-prometheus" },
       "targets": [
         {
           "expr": "rate(http_server_requests_seconds_count{application=\"finvault\"}[1m])",
@@ -28,7 +28,7 @@
       "title": "Response Time (p95)",
       "type": "timeseries",
       "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "finvault-prometheus" },
       "targets": [
         {
           "expr": "histogram_quantile(0.95, rate(http_server_requests_seconds_bucket{application=\"finvault\"}[5m]))",
@@ -50,7 +50,7 @@
       "title": "JVM Heap Memory",
       "type": "timeseries",
       "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "finvault-prometheus" },
       "targets": [
         {
           "expr": "jvm_memory_used_bytes{application=\"finvault\", area=\"heap\"}",
@@ -72,7 +72,7 @@
       "title": "Active Threads",
       "type": "timeseries",
       "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "finvault-prometheus" },
       "targets": [
         {
           "expr": "jvm_threads_live_threads{application=\"finvault\"}",
@@ -97,7 +97,7 @@
       "title": "Log Volume by Level",
       "type": "timeseries",
       "gridPos": { "h": 8, "w": 24, "x": 0, "y": 16 },
-      "datasource": { "type": "loki", "uid": "P8E80F9AEF21F6940" },
+      "datasource": { "type": "loki", "uid": "finvault-loki" },
       "targets": [
         {
           "expr": "sum by (level) (rate({job=\"finvault\"} | json [1m]))",
@@ -115,7 +115,7 @@
       "title": "Database Connection Pool",
       "type": "stat",
       "gridPos": { "h": 4, "w": 8, "x": 0, "y": 24 },
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "finvault-prometheus" },
       "targets": [
         {
           "expr": "hikaricp_connections_active{application=\"finvault\"}",
@@ -127,7 +127,7 @@
       "title": "System CPU Usage",
       "type": "gauge",
       "gridPos": { "h": 4, "w": 8, "x": 8, "y": 24 },
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "finvault-prometheus" },
       "targets": [
         {
           "expr": "system_cpu_usage{application=\"finvault\"}",
@@ -153,7 +153,7 @@
       "title": "Uptime",
       "type": "stat",
       "gridPos": { "h": 4, "w": 8, "x": 16, "y": 24 },
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "finvault-prometheus" },
       "targets": [
         {
           "expr": "process_uptime_seconds{application=\"finvault\"}",

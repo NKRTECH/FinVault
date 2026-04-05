@@ -41,7 +41,7 @@ services:
 
   # ── Monitoring Stack ───────────────────────────────────
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus:v3.2.1
     container_name: finvault-prometheus
     ports:
       - "9091:9090"
@@ -57,7 +57,7 @@ services:
       - finvault-network
 
   loki:
-    image: grafana/loki:latest
+    image: grafana/loki:3.4.2
     container_name: finvault-loki
     ports:
       - "3100:3100"
@@ -69,11 +69,12 @@ services:
       - finvault-network
 
   promtail:
-    image: grafana/promtail:latest
+    image: grafana/promtail:3.4.2
     container_name: finvault-promtail
     volumes:
       - ./monitoring/promtail/promtail-config.yml:/etc/promtail/config.yml:ro
       - app-logs:/app/logs:ro
+      - promtail-data:/var/lib/promtail
     command: -config.file=/etc/promtail/config.yml
     depends_on:
       - loki
@@ -82,13 +83,13 @@ services:
       - finvault-network
 
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:11.5.2
     container_name: finvault-grafana
     ports:
       - "3000:3000"
     environment:
-      GF_SECURITY_ADMIN_USER: admin
-      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
       GF_USERS_ALLOW_SIGN_UP: "false"
     volumes:
       - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
@@ -104,6 +105,7 @@ volumes:
   app-logs:
   prometheus-data:
   loki-data:
+  promtail-data:
   grafana-data:
 
 networks:
