@@ -117,11 +117,19 @@
                 <sqlCheck expectedResult="0">
                     SELECT COUNT(*)
                     FROM financial_records
-                WHERE amount = 5500.00
-                  AND type = 'INCOME'
-                  AND category = 'Salary'
-                  AND description = 'Monthly salary - January'
-                  AND date = '2025-01-15'
+                    WHERE created_by_id = (SELECT id FROM users WHERE username = 'admin')
+                      AND date BETWEEN '2025-01-01' AND '2025-06-30'
+                      AND description IN (
+                        'Monthly salary - January', 'Monthly salary - February', 'Monthly salary - March', 'Monthly salary - April', 'Monthly salary - May', 'Monthly salary - June',
+                        'Website redesign project for client', 'Logo design for startup', 'Dividend payment from ETF portfolio', 'Tax refund for overpaid withholding',
+                        'Monthly apartment rent - January', 'Monthly apartment rent - February', 'Monthly apartment rent - March', 'Monthly apartment rent - April', 'Monthly apartment rent - May', 'Monthly apartment rent - June',
+                        'Weekly grocery shopping at Costco', 'Organic produce and pantry restock', 'Monthly grocery run plus household supplies',
+                        'Electric bill - January', 'Internet and phone bundle', 'Electric bill - March (winter usage)',
+                        'Monthly transit pass', 'Uber rides to client meetings',
+                        'Dental cleaning and checkup', 'Prescription medication refill',
+                        'Annual streaming service bundle', 'Concert tickets',
+                        'Online course - Cloud Architecture', 'Quarterly health insurance premium'
+                      )
                 </sqlCheck>
             </and>
         </preConditions>
