@@ -6,6 +6,7 @@ import com.finvault.dto.response.FinancialRecordResponse;
 import com.finvault.enums.RecordType;
 import com.finvault.service.FinancialRecordService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ import java.time.LocalDate;
 @RequestMapping("/api/v1/records")
 @RequiredArgsConstructor
 @Tag(name = "Financial Records", description = "CRUD operations for income and expense records")
+@SecurityRequirement(name = "bearerAuth")
 public class FinancialRecordController {
 
     private final FinancialRecordService recordService;

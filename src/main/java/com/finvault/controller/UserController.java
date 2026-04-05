@@ -8,6 +8,7 @@ import com.finvault.dto.response.UserResponse;
 import com.finvault.enums.UserStatus;
 import com.finvault.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
 @Tag(name = "User Management", description = "User profile, admin user CRUD, roles, and status management")
+@SecurityRequirement(name = "bearerAuth")
 public class UserController {
 
     private final UserService userService;

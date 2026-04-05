@@ -8,6 +8,7 @@ import com.finvault.dto.response.FinancialRecordResponse;
 import com.finvault.service.AiService;
 import com.finvault.service.FinancialRecordService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ import java.util.List;
 @RequestMapping("/api/v1/ai")
 @RequiredArgsConstructor
 @Tag(name = "AI Features", description = "Gemini-powered transaction categorization and financial insights")
+@SecurityRequirement(name = "bearerAuth")
 public class AiController {
 
     private final AiService aiService;
