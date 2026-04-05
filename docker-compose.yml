@@ -100,6 +100,21 @@ services:
     networks:
       - finvault-network
 
+  # ── Code Quality ───────────────────────────────────────
+  sonarqube:
+    image: sonarqube:10.7-community
+    container_name: finvault-sonarqube
+    ports:
+      - "9000:9000"
+    environment:
+      SONAR_ES_BOOTSTRAP_CHECKS_DISABLE: "true"
+    volumes:
+      - sonarqube-data:/opt/sonarqube/data
+      - sonarqube-extensions:/opt/sonarqube/extensions
+      - sonarqube-logs:/opt/sonarqube/logs
+    networks:
+      - finvault-network
+
 volumes:
   pgdata:
   app-logs:
@@ -107,6 +122,9 @@ volumes:
   loki-data:
   promtail-data:
   grafana-data:
+  sonarqube-data:
+  sonarqube-extensions:
+  sonarqube-logs:
 
 networks:
   finvault-network:
