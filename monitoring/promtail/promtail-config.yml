@@ -1,0 +1,31 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /var/lib/promtail/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: finvault
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: finvault
+          container: finvault-app
+          __path__: /app/logs/finvault*.log
+    pipeline_stages:
+      - json:
+          expressions:
+            level: level
+            logger: logger_name
+            message: message
+            timestamp: "@timestamp"
+      - timestamp:
+          source: timestamp
+          format: RFC3339Nano
+      - labels:
+          level:

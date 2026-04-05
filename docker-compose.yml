@@ -39,9 +39,74 @@ services:
     networks:
       - finvault-network
 
+  # ── Monitoring Stack ───────────────────────────────────
+  prometheus:
+    image: prom/prometheus:v3.2.1
+    container_name: finvault-prometheus
+    ports:
+      - "9091:9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.retention.time=15d"
+    depends_on:
+      - app
+    networks:
+      - finvault-network
+
+  loki:
+    image: grafana/loki:3.4.2
+    container_name: finvault-loki
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./monitoring/loki/loki-config.yml:/etc/loki/local-config.yaml:ro
+      - loki-data:/loki
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - finvault-network
+
+  promtail:
+    image: grafana/promtail:3.4.2
+    container_name: finvault-promtail
+    volumes:
+      - ./monitoring/promtail/promtail-config.yml:/etc/promtail/config.yml:ro
+      - app-logs:/app/logs:ro
+      - promtail-data:/var/lib/promtail
+    command: -config.file=/etc/promtail/config.yml
+    depends_on:
+      - loki
+      - app
+    networks:
+      - finvault-network
+
+  grafana:
+    image: grafana/grafana:11.5.2
+    container_name: finvault-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    volumes:
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - prometheus
+      - loki
+    networks:
+      - finvault-network
+
 volumes:
   pgdata:
   app-logs:
+  prometheus-data:
+  loki-data:
+  promtail-data:
+  grafana-data:
 
 networks:
   finvault-network:
