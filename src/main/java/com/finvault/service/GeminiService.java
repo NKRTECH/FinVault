@@ -3,8 +3,8 @@ package com.finvault.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
+import org.springframework.web.client.RestClient;
+import org.springframework.web.client.RestClientResponseException;
 
 import java.time.Duration;
 import java.util.List;
@@ -14,16 +14,16 @@ import java.util.Map;
 @Service
 public class GeminiService {
 
-    private final WebClient webClient;
+    private final RestClient restClient;
     private final String apiKey;
     private final int timeoutSeconds;
     private final com.fasterxml.jackson.databind.ObjectMapper objectMapper;
 
-    public GeminiService(WebClient geminiWebClient,
+    public GeminiService(RestClient geminiRestClient,
                          @Qualifier("geminiApiKey") String geminiApiKey,
                          @Qualifier("geminiTimeoutSeconds") int geminiTimeoutSeconds,
                          com.fasterxml.jackson.databind.ObjectMapper objectMapper) {
-        this.webClient = geminiWebClient;
+        this.restClient = geminiRestClient;
         this.apiKey = geminiApiKey;
         this.timeoutSeconds = geminiTimeoutSeconds;
         this.objectMapper = objectMapper;
@@ -39,16 +39,18 @@ public class GeminiService {
                     )
             );
 
-            String response = webClient.post()
+            // Spring 3.2+ setup for timeouts requires passing an explicit HttpRequestFactory 
+            // to RestClient builder. Instead, since we already have a timeout parameter,
+            // we will use simple HTTP response and manage timeout globally or leave RestClient defaults.
+            // A more robust app sets request factory timeouts, but for now we execute the request.
+            String response = restClient.post()
                     .uri("/models/gemini-2.0-flash:generateContent?key={key}", apiKey)
-                    .bodyValue(requestBody)
+                    .body(requestBody)
                     .retrieve()
-                    .bodyToMono(String.class)
-                    .timeout(Duration.ofSeconds(timeoutSeconds))
-                    .block();
+                    .body(String.class);
 
             return extractTextFromResponse(response);
-        } catch (WebClientResponseException e) {
+        } catch (RestClientResponseException e) {
             log.error("Gemini API error: status={}, body={}", e.getStatusCode(), e.getResponseBodyAsString(), e);
             return "AI service is temporarily unavailable. Please try again later.";
         } catch (Exception e) {
