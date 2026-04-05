@@ -33,6 +33,7 @@
         <preConditions onFail="MARK_RAN">
             <and>
                 <sqlCheck expectedResult="1">SELECT COUNT(*) FROM users WHERE username = 'analyst'</sqlCheck>
+                <sqlCheck expectedResult="1">SELECT COUNT(*) FROM roles WHERE name = 'ROLE_ANALYST'</sqlCheck>
                 <sqlCheck expectedResult="0">
                     SELECT COUNT(*)
                     FROM user_roles ur
@@ -79,6 +80,7 @@
         <preConditions onFail="MARK_RAN">
             <and>
                 <sqlCheck expectedResult="1">SELECT COUNT(*) FROM users WHERE username = 'viewer'</sqlCheck>
+                <sqlCheck expectedResult="1">SELECT COUNT(*) FROM roles WHERE name = 'ROLE_VIEWER'</sqlCheck>
                 <sqlCheck expectedResult="0">
                     SELECT COUNT(*)
                     FROM user_roles ur
@@ -110,15 +112,18 @@
 
     <changeSet id="006-3-financial-records" author="finvault" context="dev,docker">
         <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="0">
-                SELECT COUNT(*)
-                FROM financial_records
+            <and>
+                <sqlCheck expectedResult="1">SELECT COUNT(*) FROM users WHERE username = 'admin'</sqlCheck>
+                <sqlCheck expectedResult="0">
+                    SELECT COUNT(*)
+                    FROM financial_records
                 WHERE amount = 5500.00
                   AND type = 'INCOME'
                   AND category = 'Salary'
                   AND description = 'Monthly salary - January'
                   AND date = '2025-01-15'
-            </sqlCheck>
+                </sqlCheck>
+            </and>
         </preConditions>
 
         <!-- ── INCOME records ─────────────────────────────── -->
@@ -221,6 +226,17 @@
                 DELETE FROM financial_records
                 WHERE created_by_id = (SELECT id FROM users WHERE username = 'admin')
                   AND date BETWEEN '2025-01-01' AND '2025-06-30'
+                  AND description IN (
+                    'Monthly salary - January', 'Monthly salary - February', 'Monthly salary - March', 'Monthly salary - April', 'Monthly salary - May', 'Monthly salary - June',
+                    'Website redesign project for client', 'Logo design for startup', 'Dividend payment from ETF portfolio', 'Tax refund for overpaid withholding',
+                    'Monthly apartment rent - January', 'Monthly apartment rent - February', 'Monthly apartment rent - March', 'Monthly apartment rent - April', 'Monthly apartment rent - May', 'Monthly apartment rent - June',
+                    'Weekly grocery shopping at Costco', 'Organic produce and pantry restock', 'Monthly grocery run plus household supplies',
+                    'Electric bill - January', 'Internet and phone bundle', 'Electric bill - March (winter usage)',
+                    'Monthly transit pass', 'Uber rides to client meetings',
+                    'Dental cleaning and checkup', 'Prescription medication refill',
+                    'Annual streaming service bundle', 'Concert tickets',
+                    'Online course - Cloud Architecture', 'Quarterly health insurance premium'
+                  )
             </sql>
         </rollback>
     </changeSet>
