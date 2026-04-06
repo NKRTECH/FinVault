@@ -18,7 +18,7 @@
         <insert tableName="users">
             <column name="username" value="analyst"/>
             <column name="email" value="analyst@finvault.com"/>
-            <column name="password" value="$2a$10$NGX7hgHct2nDPAdzADRiuu2W7eHnzUNLRz7Rhl0oauv6Xp5vD.pwC"/>
+            <column name="password" value="$2a$10$dXJ3SW6G7P50lGmMQgel2uB5pDQo6cKBU5Qk5D/GzXqRcVfVAO0Hy"/>
             <column name="full_name" value="Jane Analyst"/>
             <column name="status" value="ACTIVE"/>
             <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
@@ -65,7 +65,7 @@
         <insert tableName="users">
             <column name="username" value="viewer"/>
             <column name="email" value="viewer@finvault.com"/>
-            <column name="password" value="$2a$10$NGX7hgHct2nDPAdzADRiuu2W7eHnzUNLRz7Rhl0oauv6Xp5vD.pwC"/>
+            <column name="password" value="$2a$10$dXJ3SW6G7P50lGmMQgel2uB5pDQo6cKBU5Qk5D/GzXqRcVfVAO0Hy"/>
             <column name="full_name" value="Bob Viewer"/>
             <column name="status" value="ACTIVE"/>
             <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
