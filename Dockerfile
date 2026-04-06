@@ -38,8 +38,8 @@ USER finvault
 # Expose application port and management port
 EXPOSE 8080 9090
 
-# Health check
+# Health check (uses PORT if set by platform, else defaults to 9090 for local docker)
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
-  CMD wget -qO- http://localhost:9090/actuator/health || exit 1
+  CMD wget -qO- http://localhost:${PORT:-9090}/actuator/health || exit 1
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
